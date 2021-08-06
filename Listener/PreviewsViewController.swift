@@ -13,7 +13,16 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	// MARK: - Properties
 	private var recordsLists: [RecordsList] = []
-	let cellSpacingHeight: CGFloat = 5
+	private let cellSpacingHeight: CGFloat = 5
+	private let previewColors: [UIColor] = [UIColor.systemRed,
+											UIColor.systemGreen,
+											UIColor.systemBlue,
+											UIColor.systemPink,
+											UIColor.systemBrown,
+											UIColor.systemCyan,
+											UIColor.systemPurple,
+											UIColor.systemYellow,
+											UIColor.systemMint]
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +32,15 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 		recordsLists.append(RecordsList(id: "333", name: "third", details: ""))
 		recordsLists.append(RecordsList(id: "444", name: "fourth", details: "details"))
 		recordsLists.append(RecordsList(id: "555", name: "fifth", details: "details"))
+		recordsLists.append(RecordsList(id: "333", name: "6", details: ""))
+		recordsLists.append(RecordsList(id: "444", name: "7", details: "details"))
+		recordsLists.append(RecordsList(id: "555", name: "8", details: "details"))
+		recordsLists.append(RecordsList(id: "6333", name: "9", details: ""))
+		recordsLists.append(RecordsList(id: "7444", name: "10", details: "details"))
+		recordsLists.append(RecordsList(id: "8555", name: "11", details: "details"))
+		recordsLists.append(RecordsList(id: "9333", name: "12", details: ""))
+		recordsLists.append(RecordsList(id: "10444", name: "13", details: "details"))
+		recordsLists.append(RecordsList(id: "11555", name: "14", details: "details"))
 		
 //		previews.contentInset = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: -20)
     }
@@ -53,7 +71,7 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 		cell.details?.text = recordsLists[indexPath.section].details
 		
 		// add border and color
-		cell.backgroundColor = UIColor.systemGreen
+		cell.backgroundColor = previewColors[indexPath.section % previewColors.count]
 //		cell.layer.borderColor = UIColor.clear.cgColor
 		cell.layer.borderWidth = 0
 		cell.layer.cornerRadius = 8
