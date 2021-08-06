@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X7n-zU-VpZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -113,7 +114,14 @@
                         <viewLayoutGuide key="safeArea" id="PwU-E2-65b"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Listener" id="6nf-1W-WOJ"/>
+                    <navigationItem key="navigationItem" title="My Lists" id="6nf-1W-WOJ">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="0VJ-me-qyL">
+                            <imageReference key="image" image="plus" catalog="system"/>
+                            <connections>
+                                <segue destination="haG-R8-Cvr" kind="show" id="xds-LV-ThS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="previews" destination="Hwg-en-G6P" id="Z5C-qS-WAd"/>
                     </connections>
@@ -122,9 +130,28 @@
             </objects>
             <point key="canvasLocation" x="821.73913043478262" y="138.61607142857142"/>
         </scene>
+        <!--Add List-->
+        <scene sceneID="LIe-bX-K3E">
+            <objects>
+                <viewController id="haG-R8-Cvr" customClass="ListAdditionViewController" customModule="Listener" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CJ4-1Y-0Yc" customClass="ListAddition">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ljl-fU-CGz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add List" id="7HO-IP-edL">
+                        <barButtonItem key="backBarButtonItem" title="We" id="HQS-A9-iVY"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iMh-2k-Eo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1541" y="654"/>
+        </scene>
     </scenes>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

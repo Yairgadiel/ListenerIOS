@@ -17,6 +17,7 @@
 		BDCBFC6826B44EED00EA3241 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCBFC6726B44EED00EA3241 /* RecordsList.swift */; };
 		BDF7C50926BB0A2200E3DE1E /* PreviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7C50826BB0A2200E3DE1E /* PreviewsViewController.swift */; };
 		BDF7C50B26BC105700E3DE1E /* ListPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7C50A26BC105700E3DE1E /* ListPreviewCell.swift */; };
+		BDF7C50D26BD49A200E3DE1E /* ListAdditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7C50C26BD49A200E3DE1E /* ListAdditionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		BDCBFC6726B44EED00EA3241 /* RecordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsList.swift; sourceTree = "<group>"; };
 		BDF7C50826BB0A2200E3DE1E /* PreviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsViewController.swift; sourceTree = "<group>"; };
 		BDF7C50A26BC105700E3DE1E /* ListPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPreviewCell.swift; sourceTree = "<group>"; };
+		BDF7C50C26BD49A200E3DE1E /* ListAdditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAdditionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				BDCBFC5426B44BE500EA3241 /* Listener.xcdatamodeld */,
 				BDF7C50826BB0A2200E3DE1E /* PreviewsViewController.swift */,
 				BDF7C50A26BC105700E3DE1E /* ListPreviewCell.swift */,
+				BDF7C50C26BD49A200E3DE1E /* ListAdditionViewController.swift */,
 			);
 			path = Listener;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */,
 				BDCBFC4E26B44BE500EA3241 /* SceneDelegate.swift in Sources */,
 				BDCBFC6826B44EED00EA3241 /* RecordsList.swift in Sources */,
+				BDF7C50D26BD49A200E3DE1E /* ListAdditionViewController.swift in Sources */,
 				BDCBFC5626B44BE500EA3241 /* Listener.xcdatamodeld in Sources */,
 				BDF7C50B26BC105700E3DE1E /* ListPreviewCell.swift in Sources */,
 				BDF7C50926BB0A2200E3DE1E /* PreviewsViewController.swift in Sources */,
