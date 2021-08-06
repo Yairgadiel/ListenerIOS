@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X7n-zU-VpZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -30,7 +29,7 @@
         <!--Login-->
         <scene sceneID="exW-ZT-GpS">
             <objects>
-                <viewController title="Login" id="BbV-VJ-2JO" customClass="PreviewsViewController" customModule="Listener" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" id="BbV-VJ-2JO" customClass="LoginViewController" customModule="Listener" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RwB-z3-Psj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +40,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button" buttonSize="medium"/>
                                 <connections>
-                                    <segue destination="oew-fj-ubA" kind="show" id="Vkq-N1-nxM"/>
+                                    <segue destination="oew-fj-ubA" kind="show" identifier="loginToPreviews" id="Vkq-N1-nxM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -75,7 +74,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="listName" text="List Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nke-Lp-ZZ8">
-                                                    <rect key="frame" x="22" y="6" width="99" height="33"/>
+                                                    <rect key="frame" x="22" y="6" width="245" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -137,16 +136,67 @@
                     <view key="view" contentMode="scaleToFill" id="CJ4-1Y-0Yc" customClass="ListAddition">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Unique ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="VkK-Ag-0Tx">
+                                <rect key="frame" x="20" y="136" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="List Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="lOw-dt-CLd">
+                                <rect key="frame" x="20" y="199" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Optional Details" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="UI2-Cp-SqX">
+                                <rect key="frame" x="20" y="260" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5u4-Yv-jHe">
+                                <rect key="frame" x="80" y="481" width="79" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="CANCEL">
+                                    <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="cancelAction:" destination="haG-R8-Cvr" eventType="touchUpInside" id="eOM-T9-2wv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaW-nO-DQj">
+                                <rect key="frame" x="257" y="481" width="77" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="CREATE">
+                                    <color key="baseForegroundColor" systemColor="systemGreenColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createAction:" destination="haG-R8-Cvr" eventType="touchUpInside" id="2fd-b8-aXL"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ljl-fU-CGz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ljl-fU-CGz" firstAttribute="bottom" secondItem="xaW-nO-DQj" secondAttribute="bottom" constant="350" id="518-RR-gJu"/>
+                            <constraint firstItem="ljl-fU-CGz" firstAttribute="bottom" secondItem="5u4-Yv-jHe" secondAttribute="bottom" constant="350" id="CHs-SZ-PFu"/>
+                            <constraint firstItem="5u4-Yv-jHe" firstAttribute="leading" secondItem="ljl-fU-CGz" secondAttribute="leading" constant="80" id="DMH-FB-Wa7"/>
+                            <constraint firstItem="ljl-fU-CGz" firstAttribute="trailing" secondItem="xaW-nO-DQj" secondAttribute="trailing" constant="80" id="s75-61-Gkg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add List" id="7HO-IP-edL">
                         <barButtonItem key="backBarButtonItem" title="We" id="HQS-A9-iVY"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="listDetails" destination="UI2-Cp-SqX" id="e2v-tK-9i8"/>
+                        <outlet property="listId" destination="VkK-Ag-0Tx" id="iEH-EW-oOp"/>
+                        <outlet property="listName" destination="lOw-dt-CLd" id="10a-WS-GEb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMh-2k-Eo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1541" y="654"/>
+            <point key="canvasLocation" x="1540.5797101449277" y="653.57142857142856"/>
         </scene>
     </scenes>
     <resources>
@@ -157,6 +207,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
