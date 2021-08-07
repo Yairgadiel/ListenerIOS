@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD9B00E026BF049300453AB2 /* CheckedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */; };
 		BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCBFC4B26B44BE500EA3241 /* AppDelegate.swift */; };
 		BDCBFC4E26B44BE500EA3241 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCBFC4D26B44BE500EA3241 /* SceneDelegate.swift */; };
 		BDCBFC5026B44BE500EA3241 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCBFC4F26B44BE500EA3241 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedRecord.swift; sourceTree = "<group>"; };
 		BDCBFC4826B44BE500EA3241 /* Listener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCBFC4B26B44BE500EA3241 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDCBFC4D26B44BE500EA3241 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				BDCBFC6726B44EED00EA3241 /* RecordsList.swift */,
 				BDF7C50E26BD6D4900E3DE1E /* Model.swift */,
+				BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				BDCBFC5026B44BE500EA3241 /* ViewController.swift in Sources */,
 				BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */,
 				BDCBFC4E26B44BE500EA3241 /* SceneDelegate.swift in Sources */,
+				BD9B00E026BF049300453AB2 /* CheckedRecord.swift in Sources */,
 				BDCBFC6826B44EED00EA3241 /* RecordsList.swift in Sources */,
 				BDF7C50D26BD49A200E3DE1E /* ListAdditionViewController.swift in Sources */,
 				BDCBFC5626B44BE500EA3241 /* Listener.xcdatamodeld in Sources */,
