@@ -117,12 +117,13 @@
                         <barButtonItem key="rightBarButtonItem" title="Add" id="0VJ-me-qyL">
                             <imageReference key="image" image="plus" catalog="system"/>
                             <connections>
-                                <segue destination="haG-R8-Cvr" kind="show" id="xds-LV-ThS"/>
+                                <segue destination="haG-R8-Cvr" kind="show" identifier="previewsToAddition" id="xds-LV-ThS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="previews" destination="Hwg-en-G6P" id="Z5C-qS-WAd"/>
+                        <segue destination="f2P-dh-Psg" kind="show" identifier="previewsToRecordsList" id="XZT-Ff-eQD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ri4-21-WoT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,7 +197,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMh-2k-Eo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540.5797101449277" y="653.57142857142856"/>
+            <point key="canvasLocation" x="1722" y="139"/>
+        </scene>
+        <!--RecordsList-->
+        <scene sceneID="NTF-gP-uPz">
+            <objects>
+                <viewController title="RecordsList" id="f2P-dh-Psg" customClass="RecordsListViewController" customModule="Listener" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pFC-3Z-BGI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="listId" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-YJ-yBn">
+                                <rect key="frame" x="333" y="88" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hyX-el-2X8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="RecordsList" id="8S3-sC-mvZ"/>
+                    <connections>
+                        <outlet property="listIdLabel" destination="42Y-YJ-yBn" id="64V-xy-NFi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ci7-FE-NJ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1607" y="856"/>
         </scene>
     </scenes>
     <resources>
