@@ -27,7 +27,12 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-
+		// TODO
+		// 1. Update RecordsList model with all relevant attributes (assume all are checked record)
+		// 2. Create Record Model
+		// 3. Create RecordsList controller with a table view and segue to it on preview press
+		// 4. Continue learning DB - min 42
+		
 		
 //		recordsLists.append(RecordsList(id: "111", name: "first", details: "details"))
 //		recordsLists.append(RecordsList(id: "222", name: "second", details: "details oh many many details. you can't imagine how many"))
@@ -118,5 +123,16 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		   // note that indexPath.section is used rather than indexPath.row
 		   print("You tapped cell number \(indexPath.section).")
+
+		   self.performSegue(withIdentifier: "previewsToRecordsList", sender: indexPath.section)
 	   }
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "previewsToRecordsList") {
+			let selectedRow = sender as! Int
+			
+			let destinationVC = segue.destination as! RecordsListViewController
+			destinationVC.listId = recordsLists[selectedRow].id
+		}
+	}
 }

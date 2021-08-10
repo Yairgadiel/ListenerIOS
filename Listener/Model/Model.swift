@@ -20,6 +20,22 @@ class Model {
 		return lists
 	}
 	
+	
+	func getListById(id: String) -> RecordsList? {
+		
+		var recordsList: RecordsList? = nil
+		
+		for list in lists {
+			if (list.id == id) {
+				recordsList = list
+			
+				break;
+			}
+		}
+		
+		return recordsList
+	}
+	
 	func addList(recordsList: RecordsList) {
 		lists.append(recordsList)
 	}

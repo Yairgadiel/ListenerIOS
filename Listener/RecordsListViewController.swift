@@ -10,8 +10,11 @@ import UIKit
 class RecordsListViewController: UIViewController {
 	
 	@IBOutlet weak var listIdLabel: UILabel!
+	@IBOutlet weak var listDetailsLabel: UILabel!
 	
 	var listId: String?
+	
+	private var recordsList: RecordsList?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +24,16 @@ class RecordsListViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		// Do any additional setup after loading the view.
-		listIdLabel.text = listId
+		if (listId == nil) {
+			navigationController?.popViewController(animated: true)
+		}
+		else {
+			recordsList = Model.instance.getListById(id: listId!)
+			
+			listIdLabel.text = listId
+			listDetailsLabel.text = recordsList?.details
+			self.navigationItem.title = recordsList?.name
+		}
 	}
     
 
