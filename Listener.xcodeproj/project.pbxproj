@@ -55,6 +55,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD567D7726C2DCE400082043 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BD567D7B26C2DD2E00082043 /* Records List */,
+				BD567D7A26C2DD1D00082043 /* Login */,
+				BD567D7926C2DD0900082043 /* Addition */,
+				BD567D7826C2DCEF00082043 /* Previews */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BD567D7826C2DCEF00082043 /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				BDF7C50826BB0A2200E3DE1E /* PreviewsViewController.swift */,
+				BDF7C50A26BC105700E3DE1E /* ListPreviewCell.swift */,
+			);
+			path = Previews;
+			sourceTree = "<group>";
+		};
+		BD567D7926C2DD0900082043 /* Addition */ = {
+			isa = PBXGroup;
+			children = (
+				BDF7C50C26BD49A200E3DE1E /* ListAdditionViewController.swift */,
+			);
+			path = Addition;
+			sourceTree = "<group>";
+		};
+		BD567D7A26C2DD1D00082043 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BDF7C51026BD776000E3DE1E /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		BD567D7B26C2DD2E00082043 /* Records List */ = {
+			isa = PBXGroup;
+			children = (
+				BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */,
+			);
+			path = "Records List";
+			sourceTree = "<group>";
+		};
 		BDCBFC3F26B44BE500EA3241 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +119,7 @@
 		BDCBFC4A26B44BE500EA3241 /* Listener */ = {
 			isa = PBXGroup;
 			children = (
+				BD567D7726C2DCE400082043 /* UI */,
 				BDCBFC6426B44D3100EA3241 /* Model */,
 				BDCBFC4B26B44BE500EA3241 /* AppDelegate.swift */,
 				BDCBFC4D26B44BE500EA3241 /* SceneDelegate.swift */,
@@ -84,11 +129,6 @@
 				BDCBFC5926B44BE900EA3241 /* LaunchScreen.storyboard */,
 				BDCBFC5C26B44BE900EA3241 /* Info.plist */,
 				BDCBFC5426B44BE500EA3241 /* Listener.xcdatamodeld */,
-				BDF7C50826BB0A2200E3DE1E /* PreviewsViewController.swift */,
-				BDF7C50A26BC105700E3DE1E /* ListPreviewCell.swift */,
-				BDF7C50C26BD49A200E3DE1E /* ListAdditionViewController.swift */,
-				BDF7C51026BD776000E3DE1E /* LoginViewController.swift */,
-				BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */,
 			);
 			path = Listener;
 			sourceTree = "<group>";
