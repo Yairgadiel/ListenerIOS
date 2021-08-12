@@ -23,6 +23,14 @@ class RecordsList: NSObject {
 		self.records = records
 	}
 	
+	init(id: String, name: String, details: String, records: [CheckedRecord]) {
+		self.id = id
+		self.name = name
+		self.details = details
+		self.dateCreated = Int64(Date().timeIntervalSince1970 * 1000)
+		self.records = records
+	}
+	
 	init(id: String, name: String, details: String, dateCreated: Int64) {
 		self.id = id
 		self.name = name
