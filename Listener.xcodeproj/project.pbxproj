@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD567D7D26C2DDC500082043 /* CheckedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */; };
 		BD9B00E026BF049300453AB2 /* CheckedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */; };
 		BD9B00E226BF0D8600453AB2 /* RecordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */; };
 		BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCBFC4B26B44BE500EA3241 /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedRecordCell.swift; sourceTree = "<group>"; };
 		BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedRecord.swift; sourceTree = "<group>"; };
 		BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsListViewController.swift; sourceTree = "<group>"; };
 		BDCBFC4826B44BE500EA3241 /* Listener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listener.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */,
+				BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */,
 			);
 			path = "Records List";
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				BDF7C50B26BC105700E3DE1E /* ListPreviewCell.swift in Sources */,
 				BDF7C51126BD776000E3DE1E /* LoginViewController.swift in Sources */,
 				BDF7C50926BB0A2200E3DE1E /* PreviewsViewController.swift in Sources */,
+				BD567D7D26C2DDC500082043 /* CheckedRecordCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

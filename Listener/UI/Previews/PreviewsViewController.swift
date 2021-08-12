@@ -71,12 +71,9 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 
 	// MARK: - TableView
 	
-//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//		recordsLists.count
-//	}
 	func numberOfSections(in tableView: UITableView) -> Int {
 		   return self.recordsLists.count
-	   }
+	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = previews.dequeueReusableCell(withIdentifier: "ListPreviewCell", for: indexPath) as! ListPreviewCell
@@ -99,8 +96,6 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 90
 	}
-	
-
 	
 	// There is just one row in every section
 	  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -126,6 +121,8 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 
 		   self.performSegue(withIdentifier: "previewsToRecordsList", sender: indexPath.section)
 	   }
+	
+	// MARK: - Segue
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "previewsToRecordsList") {
