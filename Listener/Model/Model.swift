@@ -6,49 +6,84 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 class Model {
 	static let instance = Model()
-	private var lists: [RecordsList]
-	
 	private init() {
-		// TODO get lists from DB
-		lists = []
-		lists.append(RecordsList(id: "123", name: "123 name", details: "detail so many bla blas", records: []))
 	}
 	
-	func getAllLists() -> [RecordsList] {
-		return lists
+	func getAllLists(callback: @escaping ([RecordsList])->Void) {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		
+		let req = RecordsList.fetchRequest() as NSFetchRequest<RecordsList>
+		req.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+		
+		DispatchQueue.global().async {
+			var lists: [RecordsList] = [RecordsList]()
+		
+			do {
+				lists = try context.fetch(req)
+			}
+			catch {
+				lists = [RecordsList]()
+			}
+			
+			DispatchQueue.global().async {
+				callback(lists)
+			}
+		}
 	}
 	
-	func getListById(id: String) -> RecordsList? {
+	func getList(byId: String) -> RecordsList? {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 		
 		var recordsList: RecordsList? = nil
 		
-		for list in lists {
-			if (list.id == id) {
-				recordsList = list
-				
-				recordsList?.records.append(CheckedRecord(text: "text", imgPath: "path", isChecked: true))
-				recordsList?.records.append(CheckedRecord(text: "text2", imgPath: "path", isChecked: false))
+		let req = RecordsList.fetchRequest() as NSFetchRequest<RecordsList>
+		req.predicate = NSPredicate(format: "id == \(byId)")
+		
+		do {
+			let recordsLists = try context.fetch(req)
 			
-				break;
+			if (recordsLists.count > 0) {
+				recordsList = recordsLists[0]
 			}
+			
+		}
+		catch {
 		}
 		
 		return recordsList
 	}
 	
 	func addList(recordsList: RecordsList) {
-		lists.append(recordsList)
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		
+		do {
+			try context.save()
+		}
+		catch {
+			
+		}
 	}
 	
-	func deleteList(recordsList: RecordsList) {		
-		for i in 0..<lists.count {
-			if (lists[i].id == recordsList.id) {
-				lists.remove(at: i)
-				break
-			}
+	func deleteList(recordsList: RecordsList) {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		context.delete(recordsList)
+		
+		do {
+			try context.save()
 		}
+		catch {
+			
+		}
+//		for i in 0..<lists.count {
+//			if (lists[i].id == recordsList.id) {
+//				lists.remove(at: i)
+//				break
+//			}
+//		}
 	}
 }

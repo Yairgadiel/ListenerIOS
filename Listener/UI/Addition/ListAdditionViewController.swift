@@ -26,10 +26,9 @@ class ListAdditionViewController: UIViewController {
 		
 		// TODO validate input
 		
-		Model.instance.addList(recordsList: RecordsList(id: id,
+		Model.instance.addList(recordsList: RecordsList.create(id: id,
 														name: name,
-														details: details,
-														dateCreated: Int64(Date().timeIntervalSince1970 * 1000)))
+														details: details))
 		
 		navigationController?.popViewController(animated: true)
 	}
