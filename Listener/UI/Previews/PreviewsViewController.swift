@@ -53,9 +53,12 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
-		recordsLists = Model.instance.getAllLists()
-		previews.reloadData()
+	
+		// todo show loader
+		Model.instance.getAllLists { data in
+			self.recordsLists = data
+			self.previews.reloadData()
+		}
 	}
 
 	
