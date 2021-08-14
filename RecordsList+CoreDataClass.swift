@@ -21,6 +21,7 @@ public class RecordsList: NSManagedObject {
 		recordsList.details = details
 		recordsList.dateCreated = Int64(Date().timeIntervalSince1970 * 1000)
 		recordsList.records = ""
+		recordsList.type = 1
 		
 		return recordsList
 	}
@@ -81,4 +82,97 @@ public class RecordsList: NSManagedObject {
 //	static func stringToRecords(recordsStr: String) -> [CheckedRecord] {
 //		
 //	}
+}
+
+extension RecordsList {
+	static func getAll(callback: @escaping ([RecordsList])->Void) {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		
+		let req = RecordsList.fetchRequest() as NSFetchRequest<RecordsList>
+		req.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+		
+		DispatchQueue.global().async {
+			var lists: [RecordsList] = [RecordsList]()
+		
+			do {
+				lists = try context.fetch(req)
+			}
+			catch {
+				lists = [RecordsList]()
+			}
+			
+			DispatchQueue.main.async {
+				callback(lists)
+			}
+		}
+	}
+	
+	static func getList(byId: String) -> RecordsList? {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		
+		var recordsList: RecordsList? = nil
+		
+		let req = RecordsList.fetchRequest() as NSFetchRequest<RecordsList>
+		req.predicate = NSPredicate(format: "id == \(byId)")
+		
+		do {
+			let recordsLists = try context.fetch(req)
+			
+			if (recordsLists.count > 0) {
+				recordsList = recordsLists[0]
+			}
+			
+		}
+		catch {
+		}
+		
+		return recordsList
+	}
+	
+	func save() {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		
+		do {
+			try context.save()
+		}
+		catch {
+			
+		}
+	}
+	
+	func deleteList() {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		context.delete(self)
+		
+		save()
+	}
+}
+
+extension RecordsList {
+	func toJson()->[String : Any] {
+		var json = [String : Any]()
+		
+		json["Id"] = id!
+		json["Name"] = name!
+		json["Details"] = details ?? ""
+		json["DateCreated"] = dateCreated
+		json["Records"] = records ?? "" // TODO
+		json["Type"] = 1
+		
+		return json
+	}
+	
+	static func fromJson(json: [String : Any])-> RecordsList{
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		let list = RecordsList(context: context)
+		
+		list.id = json["Id"] as? String
+		list.name = json["Name"] as? String
+		list.details = json["Details"] as? String
+		list.dateCreated = json["DateCreated"] as! Int64
+		list.records = json["Records"] as? String
+		list.type = json["Type"] as! Int16
+		
+		return list
+	}
 }

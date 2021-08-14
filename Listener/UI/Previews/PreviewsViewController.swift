@@ -10,6 +10,7 @@ import UIKit
 class PreviewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var previews: UITableView!
+//	@IBOutlet weak var loader: UIActivityIndicatorView!
 	
 	// MARK: - Properties
 	private var recordsLists: [RecordsList] = []
@@ -58,6 +59,8 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 		Model.instance.getAllLists { data in
 			self.recordsLists = data
 			self.previews.reloadData()
+//			self.loader.isHidden = true
+//			self.loader.layer.layoutIfNeeded()
 		}
 	}
 

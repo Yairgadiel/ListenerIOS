@@ -28,9 +28,9 @@ class ListAdditionViewController: UIViewController {
 		
 		Model.instance.addList(recordsList: RecordsList.create(id: id,
 														name: name,
-														details: details))
-		
-		navigationController?.popViewController(animated: true)
+															   details: details)) { isSuccess in
+			self.navigationController?.popViewController(animated: true)
+		}	
 	}
 	
 	@IBAction func cancelAction(_ sender: UIButton) {

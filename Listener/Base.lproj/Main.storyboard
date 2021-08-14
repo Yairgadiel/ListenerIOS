@@ -289,14 +289,21 @@
                                     <imageReference key="image" image="plus" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addRecordClick:" destination="f2P-dh-Psg" eventType="touchUpInside" id="sJ8-DE-TBE"/>
+                                    <action selector="onAddRecordClick:" destination="f2P-dh-Psg" eventType="touchUpInside" id="gpu-nf-aSe"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hyX-el-2X8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="RecordsList" id="8S3-sC-mvZ"/>
+                    <navigationItem key="navigationItem" title="RecordsList" id="8S3-sC-mvZ">
+                        <barButtonItem key="rightBarButtonItem" id="ZYz-Jp-4vw">
+                            <imageReference key="image" image="ellipsis.circle.fill" catalog="system"/>
+                            <connections>
+                                <action selector="onEllipsisClick:" destination="f2P-dh-Psg" id="YV2-c3-yfq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="listDetailsLabel" destination="5Ta-e9-2Ha" id="CTb-H5-6Q5"/>
                         <outlet property="listIdLabel" destination="42Y-YJ-yBn" id="64V-xy-NFi"/>
@@ -309,6 +316,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>

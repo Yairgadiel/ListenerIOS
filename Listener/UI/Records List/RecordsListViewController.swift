@@ -30,20 +30,24 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 			navigationController?.popViewController(animated: true)
 		}
 		else {
-			recordsList = Model.instance.getList(byId: listId!)
+			Model.instance.getList(byId: listId!, callback: { foundRecordsList in
+				self.recordsList = foundRecordsList
+
+				if (self.recordsList == nil) {
+					self.navigationController?.popViewController(animated: true)
+				}
+				else {
+					self.listIdLabel.text = self.listId
+					self.listDetailsLabel.text = self.recordsList?.details
+					self.navigationItem.title = self.recordsList?.name
+				}
+			})
 			
-			if (recordsList == nil) {
-				navigationController?.popViewController(animated: true)
-			}
-			else {
-				listIdLabel.text = listId
-				listDetailsLabel.text = recordsList?.details
-				self.navigationItem.title = recordsList?.name
-			}
+			
 		}
 	}
-	
-	@IBAction func addRecordClick(_ sender: UIButton) {
+
+	@IBAction func onAddRecordClick(_ sender: UIButton) {
 		// Check if the last record is not empty
 //		if (recordsList?.records[(recordsList?.records.count ?? 1) - 1].text != "") {
 //			recordsList?.records.append(CheckedRecord(text: "", imgPath: "", isChecked: false))
@@ -51,6 +55,33 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 //		}
 	}
 	
+	@IBAction func onEllipsisClick(_ sender: Any) {
+		let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
+		
+		alert.addAction(UIAlertAction(title: "Approve", style: .default , handler:{ (UIAlertAction)in
+			print("User click Approve button")
+		}))
+		
+		alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
+			print("User click Edit button")
+		}))
+
+		alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+			print("User click Delete button")
+		}))
+		
+		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+			print("User click Dismiss button")
+		}))
+
+		
+		//uncomment for iPad Support
+		//alert.popoverPresentationController?.sourceView = self.view
+
+		self.present(alert, animated: true, completion: {
+			print("completion block")
+		})
+	}
 	
 	// MARK: - TableView
 	
