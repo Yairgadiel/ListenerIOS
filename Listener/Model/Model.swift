@@ -24,6 +24,8 @@ class Model {
 		self.notificaionlogin = NotificationListener(name: loginKey)
 	}
 	
+	// MARK: Firestore
+	
 	func getAllLists(callback: @escaping ([RecordsList])->Void) {
 		modelFirebase.getAllRecordsList(since: 1, callback: callback)
 	}
@@ -48,6 +50,20 @@ class Model {
 	
 	func deleteList(recordsList: RecordsList) {
 		
+	}
+	
+	// MARK: Storage
+	
+	func saveRecordAttachment(name: String, img: UIImage, callback: @escaping (String)->Void) {
+		modelFirebase.uploadImage(name: name, img: img, callback: callback)
+	}
+	
+	func loadRecordAttachment(name: String, callback: @escaping (UIImage?)->Void) {
+		modelFirebase.loadImage(name: name, callback: callback)
+	}
+	
+	func deleteRecordAttachment(name: String, callback: @escaping (Bool)->Void) {
+		modelFirebase.deleteImage(name: name, callback: callback)
 	}
 }
 

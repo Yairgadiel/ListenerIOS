@@ -43,8 +43,6 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 					self.recordsTable.reloadData()
 				}
 			})
-			
-			
 		}
 	}
 	
@@ -126,8 +124,16 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-		self.imageCell?.setAttachment(image: info[UIImagePickerController.InfoKey.originalImage] as? UIImage)
-		self.dismiss(animated: true, completion: nil)
+		let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+		
+		if (image != nil) {
+			Model.instance.saveRecordAttachment(name: self.recordsList!.name! + "-" + String(Int64(Date().timeIntervalSince1970 * 1000)),
+												img: image!,
+												callback: {url in
+				self.imageCell?.setAttachment(image: image, imgPath: url)
+			})
+			
+			self.dismiss(animated: true, completion: nil)
+		}
 	}
-	
 }

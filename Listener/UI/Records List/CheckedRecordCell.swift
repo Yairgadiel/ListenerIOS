@@ -62,8 +62,9 @@ class CheckedRecordCell: UITableViewCell {
 		setIsChecked()
 	}
 	
-	func setAttachment(image: UIImage?) {
+	func setAttachment(image: UIImage?, imgPath: String) {
 		if (image != nil) {
+			self.record?.imgPath = imgPath
 			attachmentBtn.setImage(image, for: .normal)
 		}
 	}
