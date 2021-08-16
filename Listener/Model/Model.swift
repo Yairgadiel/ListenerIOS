@@ -27,7 +27,33 @@ class Model {
 	// MARK: Firestore
 	
 	func getAllLists(callback: @escaping ([RecordsList])->Void) {
-		modelFirebase.getAllRecordsList(since: 1, callback: callback)
+		// Get the local update date
+		var localLastUpdate = RecordsList.getLocalLastUpdate()
+		
+		// Get updates from remote
+		modelFirebase.getAllRecordsList(since: localLastUpdate) { (data) in
+			// Update local DB
+			
+			if (data.count > 0) {
+				// Save ALL data in local DB (the context was updated on each creation)
+				data[0].save()
+								
+				for list in data {					
+					// Get the latest last update
+					if (list.lastUpdated > localLastUpdate) {
+						localLastUpdate = list.lastUpdated
+					}
+					
+					// TODO if our user isn't a part of this list - delete it
+					// list.delete()
+				}
+				
+				RecordsList.setLocalLastUpdate(lastUpdate: localLastUpdate)
+				
+				// Read all records lists from local DB and update the caller
+				RecordsList.getAll(callback: callback)
+			}
+		}
 	}
 	
 	func getList(byId: String, callback: @escaping (RecordsList?)->Void) {
@@ -42,14 +68,11 @@ class Model {
 		}
 	}
 	
-	func addList(recordsList: RecordsList) {
+	func addList(recordsList: RecordsList, callback: @escaping (Bool)->Void) {
 		modelFirebase.add(recordsList: recordsList){ (isSuccess) in
 			self.notificaionRecordsList.post()
+			callback(isSuccess)
 		}
-	}
-	
-	func deleteList(recordsList: RecordsList) {
-		
 	}
 	
 	// MARK: Storage

@@ -9,12 +9,13 @@
 import Foundation
 import CoreData
 import UIKit
+import Firebase
 
 @objc(RecordsList)
 public class RecordsList: NSManagedObject {
 	var recordObjects: [CheckedRecord] = [CheckedRecord]()
 	
-	static func create(id: String, name: String, details: String) -> RecordsList {
+	static func create(id: String, name: String, details: String, lastUpdated: Int64) -> RecordsList {
 		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 		
 		let recordsList = RecordsList(context: context)
@@ -24,6 +25,7 @@ public class RecordsList: NSManagedObject {
 		recordsList.dateCreated = Int64(Date().timeIntervalSince1970 * 1000)
 		recordsList.records = ""
 		recordsList.type = 1
+		recordsList.lastUpdated = lastUpdated
 		
 		return recordsList
 	}
@@ -161,6 +163,7 @@ extension RecordsList {
 	
 	func save() {
 		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 		
 		do {
 			try context.save()
@@ -186,8 +189,9 @@ extension RecordsList {
 		json["Name"] = name!
 		json["Details"] = details ?? ""
 		json["DateCreated"] = dateCreated
-		json["Records"] = records ?? "" // TODO
+		json["Records"] = records ?? ""
 		json["Type"] = 1
+		json["LastUpdated"] = FieldValue.serverTimestamp()
 		
 		return json
 	}
@@ -202,8 +206,20 @@ extension RecordsList {
 		list.dateCreated = json["DateCreated"] as! Int64
 		list.records = json["Records"] as? String
 		list.type = json["Type"] as! Int16
+		list.lastUpdated = (json["LastUpdated"] as? Timestamp)?.seconds ?? 0
 		
 		return list
+	}
+}
+
+// MARK: Last update
+extension RecordsList {
+	static func setLocalLastUpdate(lastUpdate: Int64) {
+		UserDefaults.standard.setValue(lastUpdate, forKey: "RecordsLastUpdateDate")
+	}
+	
+	static func getLocalLastUpdate() -> Int64 {
+		Int64(UserDefaults.standard.integer(forKey: "RecordsLastUpdateDate"))
 	}
 }
 

@@ -10,9 +10,9 @@
 		BD1A17E826C695E400C8738E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD1A17E726C695E400C8738E /* GoogleService-Info.plist */; };
 		BD1A17EA26C6B02C00C8738E /* ModelFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1A17E926C6B02C00C8738E /* ModelFirebase.swift */; };
 		BD45A6D126CA66C6000C7794 /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */; };
+		BD45A6D326CA9FF3000C7794 /* RecordsList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD45A6D226CA9FF3000C7794 /* RecordsList+CoreDataProperties.swift */; };
 		BD567D7D26C2DDC500082043 /* CheckedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */; };
 		BD567D8326C59D1B00082043 /* RecordsList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D8126C59D1B00082043 /* RecordsList+CoreDataClass.swift */; };
-		BD567D8426C59D1B00082043 /* RecordsList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D8226C59D1B00082043 /* RecordsList+CoreDataProperties.swift */; };
 		BD9B00E026BF049300453AB2 /* CheckedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */; };
 		BD9B00E226BF0D8600453AB2 /* RecordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */; };
 		BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCBFC4B26B44BE500EA3241 /* AppDelegate.swift */; };
@@ -35,9 +35,9 @@
 		BD1A17E726C695E400C8738E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD1A17E926C6B02C00C8738E /* ModelFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFirebase.swift; sourceTree = "<group>"; };
 		BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
+		BD45A6D226CA9FF3000C7794 /* RecordsList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordsList+CoreDataProperties.swift"; path = "/Users/elliegadiel/Yair/ios/Listener/Listener/Model/RecordsList+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedRecordCell.swift; sourceTree = "<group>"; };
 		BD567D8126C59D1B00082043 /* RecordsList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordsList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		BD567D8226C59D1B00082043 /* RecordsList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordsList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedRecord.swift; sourceTree = "<group>"; };
 		BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsListViewController.swift; sourceTree = "<group>"; };
 		BDCBFC4826B44BE500EA3241 /* Listener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listener.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,8 +172,8 @@
 		BDCBFC6426B44D3100EA3241 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BD45A6D226CA9FF3000C7794 /* RecordsList+CoreDataProperties.swift */,
 				BD567D8126C59D1B00082043 /* RecordsList+CoreDataClass.swift */,
-				BD567D8226C59D1B00082043 /* RecordsList+CoreDataProperties.swift */,
 				BDCBFC5426B44BE500EA3241 /* Listener.xcdatamodeld */,
 				BDF7C50E26BD6D4900E3DE1E /* Model.swift */,
 				BD9B00DF26BF049300453AB2 /* CheckedRecord.swift */,
@@ -298,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD45A6D126CA66C6000C7794 /* ImagePickerDelegate.swift in Sources */,
+				BD45A6D326CA9FF3000C7794 /* RecordsList+CoreDataProperties.swift in Sources */,
 				BDF7C50F26BD6D4900E3DE1E /* Model.swift in Sources */,
 				BDCBFC5026B44BE500EA3241 /* ViewController.swift in Sources */,
 				BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */,
@@ -306,7 +307,6 @@
 				BD9B00E026BF049300453AB2 /* CheckedRecord.swift in Sources */,
 				BDF7C50D26BD49A200E3DE1E /* ListAdditionViewController.swift in Sources */,
 				BDCBFC5626B44BE500EA3241 /* Listener.xcdatamodeld in Sources */,
-				BD567D8426C59D1B00082043 /* RecordsList+CoreDataProperties.swift in Sources */,
 				BD567D8326C59D1B00082043 /* RecordsList+CoreDataClass.swift in Sources */,
 				BDF7C50B26BC105700E3DE1E /* ListPreviewCell.swift in Sources */,
 				BDF7C51126BD776000E3DE1E /* LoginViewController.swift in Sources */,

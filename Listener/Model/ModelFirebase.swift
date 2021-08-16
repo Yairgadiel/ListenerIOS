@@ -33,7 +33,7 @@ class ModelFirebase {
 	 * @param listener listener notifying of success/failure
 	 */
 	func add(recordsList: RecordsList, callback:@escaping (Bool)->Void) {
-		let db  = Firestore.firestore()
+		let db = Firestore.firestore()
 		db.collection(ModelFirebase.RECORDS_LIST_COLLECTION).document(recordsList.id!)
 			.setData(recordsList.toJson()){ err in
 				if let err = err {
@@ -48,8 +48,8 @@ class ModelFirebase {
 	func getAllRecordsList(since: Int64, callback:@escaping ([RecordsList])->Void) {
 		let db  = Firestore.firestore()
 		db.collection(ModelFirebase.RECORDS_LIST_COLLECTION)
-		//				  .whereField(RecordsList.LAST_UPDATED, isGreaterThanOrEqualTo: new Timestamp(since, 0))
-			.order(by: "DateCreated", descending: true)
+			.whereField("LastUpdated", isGreaterThanOrEqualTo: Timestamp(seconds: since, nanoseconds: 0))
+			.order(by: "LastUpdated", descending: true)
 			.getDocuments() { (querySnapshot, err) in
 				var data = [RecordsList]()
 				if let err = err {
