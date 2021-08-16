@@ -38,6 +38,14 @@ public class RecordsList: NSManagedObject {
 		return recordObjects
 	}
 	
+	func add(record: CheckedRecord) {
+		self.recordObjects.append(record)
+	}
+	
+	func updateRecords() {
+		self.records = self.recordsToString(records: self.recordObjects)
+	}
+	
 	// MARK: Records Converter
 	
 	private let TYPE_SEPARATOR: String = "@"

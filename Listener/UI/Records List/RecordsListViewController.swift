@@ -46,13 +46,25 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		}
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		// Save all changes in remote and local:
+		
+		// Update the items' records
+		recordsList?.updateRecords()
+		
+		Model.instance.addList(recordsList: self.recordsList!){isSuccess in}
+	}
+	
 	@IBAction func onAddRecordClick(_ sender: UIButton) {
-		// TODO add add method
-		// Check if the last record is not empty
-		//		if (recordsList?.getRecords()[(recordsList?.getRecords().count ?? 1) - 1].text != "") {
-		//			recordsList?.getRecords().append(CheckedRecord(text: "", imgPath: "", isChecked: false))
-		//			recordsTable.reloadData()
-		//		}
+		if (recordsList != nil) {
+			// Check if the last record is not empty
+			if (recordsList!.getRecords().isEmpty || recordsList!.getRecords()[recordsList!.getRecords().count - 1].text != "") {
+				recordsList?.add(record: CheckedRecord(text: "", imgPath: "", isChecked: false))
+				recordsTable.reloadData()
+			}
+		}
 	}
 	
 	@IBAction func onEllipsisClick(_ sender: Any) {
