@@ -10,7 +10,7 @@ import UIKit
 class PreviewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var previews: UITableView!
-//	@IBOutlet weak var loader: UIActivityIndicatorView!
+	var refreshControl = UIRefreshControl()
 	
 	// MARK: - Properties
 	private var recordsLists: [RecordsList] = []
@@ -27,6 +27,9 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		self.previews.addSubview(refreshControl)
+		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+		
 		self.reloadData()
 		
 		Model.instance.notificaionRecordsList.observe {
@@ -34,20 +37,20 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 		}
     }
 	
+	@objc func refresh(_ sender: AnyObject) {
+		self.reloadData()
+	}
+	
 	func reloadData() {
-		// todo show loader
+		// Show loader
+		self.refreshControl.beginRefreshing()
+		
 		Model.instance.getAllLists { data in
 			self.recordsLists = data
 			self.previews.reloadData()
-			//			self.loader.isHidden = true
-			//			self.loader.layer.layoutIfNeeded()
+			self.refreshControl.endRefreshing()
 		}
 		
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-	
 	}
 
 	
