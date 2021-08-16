@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CheckedRecordCell: UITableViewCell {
 	// MARK: Properties
@@ -65,7 +66,10 @@ class CheckedRecordCell: UITableViewCell {
 	func setAttachment(image: UIImage?, imgPath: String) {
 		if (image != nil) {
 			self.record?.imgPath = imgPath
-			attachmentBtn.setImage(image, for: .normal)
+//			attachmentBtn.setImage(image, for: .normal)
+
+			 KF.url(URL(string: imgPath))
+				.set(to: attachmentBtn.imageView!)
 		}
 	}
 }
