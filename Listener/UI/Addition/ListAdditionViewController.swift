@@ -8,16 +8,16 @@
 import UIKit
 
 class ListAdditionViewController: UIViewController {
-
+	
 	@IBOutlet weak var listId: UITextField!
 	@IBOutlet weak var listName: UITextField!
 	@IBOutlet weak var listDetails: UITextField!
 	
 	override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+		super.viewDidLoad()
+		
+		// Do any additional setup after loading the view.
+	}
 	
 	@IBAction func createAction(_ sender: UIButton) {
 		let id = listId.text!
@@ -27,10 +27,9 @@ class ListAdditionViewController: UIViewController {
 		// TODO validate input
 		
 		Model.instance.addList(recordsList: RecordsList.create(id: id,
-														name: name,
-															   details: details)) { isSuccess in
-			self.navigationController?.popViewController(animated: true)
-		}	
+															   name: name,
+															   details: details))
+		self.navigationController?.popViewController(animated: true)
 	}
 	
 	@IBAction func cancelAction(_ sender: UIButton) {

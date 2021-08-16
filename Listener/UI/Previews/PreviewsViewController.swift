@@ -27,41 +27,27 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		self.reloadData()
 		
-		// TODO
-		// 1. Update RecordsList model with all relevant attributes (assume all are checked record)
-		// 2. Create Record Model
-		// 3. Create RecordsList controller with a table view and segue to it on preview press
-		// 4. Continue learning DB - min 42
-		
-		
-//		recordsLists.append(RecordsList(id: "111", name: "first", details: "details"))
-//		recordsLists.append(RecordsList(id: "222", name: "second", details: "details oh many many details. you can't imagine how many"))
-//		recordsLists.append(RecordsList(id: "333", name: "third", details: ""))
-//		recordsLists.append(RecordsList(id: "444", name: "fourth", details: "details"))
-//		recordsLists.append(RecordsList(id: "555", name: "fifth", details: "details"))
-//		recordsLists.append(RecordsList(id: "333", name: "6", details: ""))
-//		recordsLists.append(RecordsList(id: "444", name: "7", details: "details"))
-//		recordsLists.append(RecordsList(id: "555", name: "8", details: "details"))
-//		recordsLists.append(RecordsList(id: "6333", name: "9", details: ""))
-//		recordsLists.append(RecordsList(id: "7444", name: "10", details: "details"))
-//		recordsLists.append(RecordsList(id: "8555", name: "11", details: "details"))
-//		recordsLists.append(RecordsList(id: "9333", name: "12", details: ""))
-//		recordsLists.append(RecordsList(id: "10444", name: "13", details: "details"))
-//		recordsLists.append(RecordsList(id: "11555", name: "14", details: "details"))
-		
+		Model.instance.notificaionRecordsList.observe {
+			self.reloadData()
+		}
     }
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-	
+	func reloadData() {
 		// todo show loader
 		Model.instance.getAllLists { data in
 			self.recordsLists = data
 			self.previews.reloadData()
-//			self.loader.isHidden = true
-//			self.loader.layer.layoutIfNeeded()
+			//			self.loader.isHidden = true
+			//			self.loader.layer.layoutIfNeeded()
 		}
+		
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+	
 	}
 
 	
