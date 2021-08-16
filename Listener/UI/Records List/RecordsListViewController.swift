@@ -7,21 +7,21 @@
 
 import UIKit
 
-class RecordsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RecordsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 	
 	@IBOutlet weak var listIdLabel: UILabel!
 	@IBOutlet weak var listDetailsLabel: UILabel!
 	@IBOutlet weak var recordsTable: UITableView!
-
+	
 	var listId: String?
 	
 	private var recordsList: RecordsList?
-
+	
 	// MARK: Lifecycle
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -47,14 +47,14 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 			
 		}
 	}
-
+	
 	@IBAction func onAddRecordClick(_ sender: UIButton) {
 		// TODO add add method
 		// Check if the last record is not empty
-//		if (recordsList?.getRecords()[(recordsList?.getRecords().count ?? 1) - 1].text != "") {
-//			recordsList?.getRecords().append(CheckedRecord(text: "", imgPath: "", isChecked: false))
-//			recordsTable.reloadData()
-//		}
+		//		if (recordsList?.getRecords()[(recordsList?.getRecords().count ?? 1) - 1].text != "") {
+		//			recordsList?.getRecords().append(CheckedRecord(text: "", imgPath: "", isChecked: false))
+		//			recordsTable.reloadData()
+		//		}
 	}
 	
 	@IBAction func onEllipsisClick(_ sender: Any) {
@@ -67,7 +67,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
 			print("User click Edit button")
 		}))
-
+		
 		alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
 			print("User click Delete button")
 		}))
@@ -75,11 +75,11 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
 			print("User click Dismiss button")
 		}))
-
+		
 		
 		//uncomment for iPad Support
 		//alert.popoverPresentationController?.sourceView = self.view
-
+		
 		self.present(alert, animated: true, completion: {
 			print("completion block")
 		})
@@ -97,15 +97,37 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		let currentRecord = (self.recordsList?.getRecords()[indexPath.section])!
 		
 		cell.setRecord(record: currentRecord)
+		cell.imagePickerDelegate = self
 		cell.selectionStyle = UITableViewCell.SelectionStyle.none
 		
 		return cell
 	}
-
+	
 	
 	// There is just one row in every section
-	  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		  return 1
-	  }
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	// MARK: ImagePicker
+	
+	var imageCell: CheckedRecordCell?
+	
+	func pickImage(cell: CheckedRecordCell) {
+		if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary)) {
+			self.imageCell = cell
+			
+			let imagePicker = UIImagePickerController()
+			imagePicker.delegate = self
+			imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+			imagePicker.allowsEditing = true
+			self.present(imagePicker, animated: true, completion: nil)
+		}
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+		self.imageCell?.setAttachment(image: info[UIImagePickerController.InfoKey.originalImage] as? UIImage)
+		self.dismiss(animated: true, completion: nil)
+	}
 	
 }

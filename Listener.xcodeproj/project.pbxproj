@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD1A17E826C695E400C8738E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD1A17E726C695E400C8738E /* GoogleService-Info.plist */; };
 		BD1A17EA26C6B02C00C8738E /* ModelFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1A17E926C6B02C00C8738E /* ModelFirebase.swift */; };
+		BD45A6D126CA66C6000C7794 /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */; };
 		BD567D7D26C2DDC500082043 /* CheckedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */; };
 		BD567D8326C59D1B00082043 /* RecordsList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D8126C59D1B00082043 /* RecordsList+CoreDataClass.swift */; };
 		BD567D8426C59D1B00082043 /* RecordsList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD567D8226C59D1B00082043 /* RecordsList+CoreDataProperties.swift */; };
@@ -33,6 +34,7 @@
 		8423ED0E33B24120F8BB7216 /* Pods-Listener.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listener.debug.xcconfig"; path = "Target Support Files/Pods-Listener/Pods-Listener.debug.xcconfig"; sourceTree = "<group>"; };
 		BD1A17E726C695E400C8738E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD1A17E926C6B02C00C8738E /* ModelFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFirebase.swift; sourceTree = "<group>"; };
+		BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
 		BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedRecordCell.swift; sourceTree = "<group>"; };
 		BD567D8126C59D1B00082043 /* RecordsList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordsList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BD567D8226C59D1B00082043 /* RecordsList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordsList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -126,6 +128,7 @@
 			children = (
 				BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */,
 				BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */,
+				BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */,
 			);
 			path = "Records List";
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD45A6D126CA66C6000C7794 /* ImagePickerDelegate.swift in Sources */,
 				BDF7C50F26BD6D4900E3DE1E /* Model.swift in Sources */,
 				BDCBFC5026B44BE500EA3241 /* ViewController.swift in Sources */,
 				BDCBFC4C26B44BE500EA3241 /* AppDelegate.swift in Sources */,

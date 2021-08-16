@@ -8,13 +8,16 @@
 import UIKit
 
 class CheckedRecordCell: UITableViewCell {
+	// MARK: Properties
+	private var record: CheckedRecord?
+	var imagePickerDelegate: ImagePickerDelegate?
 
+	// MARK: Outlets
+	
 	@IBOutlet weak var recordTextField: UITextField!
 	@IBOutlet weak var isCheckedBtn: UIButton!
+	@IBOutlet weak var attachmentBtn: UIButton!
 	
-	private var record: CheckedRecord?
-	
-
 	@IBAction func onCheckedClicked(_ sender: UIButton) {
 		record?.isChecked.toggle()
 
@@ -25,24 +28,29 @@ class CheckedRecordCell: UITableViewCell {
 		record?.text = sender.text ?? ""
 	}
 	
-	
-	// Button Function ( Can also add to custome class )
-	func setIsChecked() {
-		switch record?.isChecked {
-			  case true:
-					// Chnage backgroundImage to hart image
-					isCheckedBtn.setImage(UIImage(named: "checked"), for: .normal)
-			  default:
-					isCheckedBtn.setImage(UIImage(named: "unchecked"), for: .normal)
-		 }
+	@IBAction func onAttachmentClicked(_ sender: UIButton) {
+		imagePickerDelegate?.pickImage(cell: self)
 	}
 	
+	// MARK: Lifecycle
+	
 	override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+		super.awakeFromNib()
+	}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
+	}
+	
+	// MARK: Methods
+	
+	func setIsChecked() {
+		if (record?.isChecked == true) {
+			isCheckedBtn.setImage(UIImage(named: "checked"), for: .normal)
+		}
+		else {
+			isCheckedBtn.setImage(UIImage(named: "unchecked"), for: .normal)
+		}
 	}
 	
 	func setRecord(record: CheckedRecord) {
@@ -52,5 +60,11 @@ class CheckedRecordCell: UITableViewCell {
 		recordTextField.text = record.text
 		
 		setIsChecked()
+	}
+	
+	func setAttachment(image: UIImage?) {
+		if (image != nil) {
+			attachmentBtn.setImage(image, for: .normal)
+		}
 	}
 }

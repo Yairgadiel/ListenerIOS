@@ -80,10 +80,10 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		// add border and color
 		cell.backgroundColor = previewColors[indexPath.section % previewColors.count]
-//		cell.layer.borderColor = UIColor.clear.cgColor
 		cell.layer.borderWidth = 0
 		cell.layer.cornerRadius = 8
 		cell.clipsToBounds = true
+		cell.selectionStyle = .none
 		
 		return cell
 	}
