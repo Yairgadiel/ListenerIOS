@@ -59,17 +59,23 @@ class CheckedRecordCell: UITableViewCell {
 		
 		// Init views
 		recordTextField.text = record.text
+		self.setAttachmentImg()
 		
 		setIsChecked()
 	}
 	
-	func setAttachment(image: UIImage?, imgPath: String) {
-		if (image != nil) {
+	func setAttachment(imgPath: String) {
+		if (imgPath != "") {
 			self.record?.imgPath = imgPath
-//			attachmentBtn.setImage(image, for: .normal)
 
-			 KF.url(URL(string: imgPath))
-				.set(to: attachmentBtn.imageView!)
+			self.setAttachmentImg()
+		}
+	}
+	
+	private func setAttachmentImg() {
+		if (record != nil && record?.imgPath != "" && record?.imgPath != "null") {
+			KF.url(URL(string: record!.imgPath))
+				  .set(to: attachmentBtn.imageView!)
 		}
 	}
 }

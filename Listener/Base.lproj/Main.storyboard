@@ -294,6 +294,10 @@
                                     <action selector="onAddRecordClick:" destination="f2P-dh-Psg" eventType="touchUpInside" id="gpu-nf-aSe"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="eOS-VA-P3K">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hyX-el-2X8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -309,6 +313,7 @@
                     <connections>
                         <outlet property="listDetailsLabel" destination="5Ta-e9-2Ha" id="CTb-H5-6Q5"/>
                         <outlet property="listIdLabel" destination="42Y-YJ-yBn" id="64V-xy-NFi"/>
+                        <outlet property="loader" destination="eOS-VA-P3K" id="6iw-wD-hb0"/>
                         <outlet property="recordsTable" destination="57d-AU-lBI" id="qR8-3G-bXI"/>
                     </connections>
                 </viewController>

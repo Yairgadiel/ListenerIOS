@@ -12,6 +12,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	@IBOutlet weak var listIdLabel: UILabel!
 	@IBOutlet weak var listDetailsLabel: UILabel!
 	@IBOutlet weak var recordsTable: UITableView!
+	@IBOutlet weak var loader: UIActivityIndicatorView!
 	
 	var listId: String?
 	
@@ -21,6 +22,8 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		setLoading(true)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +44,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 					self.listDetailsLabel.text = self.recordsList?.details
 					self.navigationItem.title = self.recordsList?.name
 					self.recordsTable.reloadData()
+					self.setLoading(false)
 				}
 			})
 		}
@@ -56,6 +60,8 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		
 		Model.instance.addList(recordsList: self.recordsList!){isSuccess in}
 	}
+	
+	// MARK: Actions
 	
 	@IBAction func onAddRecordClick(_ sender: UIButton) {
 		if (recordsList != nil) {
@@ -125,6 +131,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	func pickImage(cell: CheckedRecordCell) {
 		if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary)) {
+			setLoading(true)
 			self.imageCell = cell
 			
 			let imagePicker = UIImagePickerController()
@@ -132,6 +139,9 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 			imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
 			imagePicker.allowsEditing = true
 			self.present(imagePicker, animated: true, completion: nil)
+		}
+		else {
+			print("Photo library unavailable")
 		}
 	}
 	
@@ -142,10 +152,23 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 			Model.instance.saveRecordAttachment(name: self.recordsList!.name! + "-" + String(Int64(Date().timeIntervalSince1970 * 1000)),
 												img: image!,
 												callback: {url in
-				self.imageCell?.setAttachment(image: image, imgPath: url)
+				self.imageCell?.setAttachment(imgPath: url)
+	
+				self.setLoading(false)
 			})
 			
 			self.dismiss(animated: true, completion: nil)
+		}
+	}
+	
+	// MARK: Methods
+	
+	func setLoading(_ isLoading: Bool) {
+		if (isLoading) {
+			self.loader.startAnimating()
+		}
+		else {
+			self.loader.stopAnimating()
 		}
 	}
 }

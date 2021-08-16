@@ -65,11 +65,14 @@ public class RecordsList: NSManagedObject {
 			for i in 0..<records.count {
 				let record: CheckedRecord = records[i]
 				
-				json.append(record.toJson())
-				
-				// Separate records with ','
-				if (i < records.count - 1) {
-					json.append(",")
+				// Not saving empty records
+				if (record.text != "") {
+					json.append(record.toJson())
+					
+					// Separate records with ','
+					if (i < records.count - 1) {
+						json.append(",")
+					}
 				}
 			}
 			
