@@ -257,12 +257,13 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bi9-Pi-aci">
                                                     <rect key="frame" x="351" y="12" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain">
                                                         <imageReference key="image" image="paperclip" catalog="system"/>
-                                                        <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="onAttachmentClicked:" destination="a4F-1D-OTH" eventType="touchUpInside" id="vmk-K9-fH7"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -270,6 +271,7 @@
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
                                         <connections>
+                                            <outlet property="attachmentBtn" destination="Bi9-Pi-aci" id="acI-38-mvT"/>
                                             <outlet property="isCheckedBtn" destination="5wd-Tu-a4t" id="39f-ap-Mg9"/>
                                             <outlet property="recordTextField" destination="nSU-08-wh9" id="hmM-bg-a0r"/>
                                         </connections>

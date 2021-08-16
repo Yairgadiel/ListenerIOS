@@ -214,51 +214,55 @@ class ModelFirebase {
 	  }
 
 	  
+  */
 
 	  // MARK: Storage
 
-	  public func uploadImage(String name, Bitmap img, IOnImageUploadedListener listener) {
-  let storage = Storage.storage()
-		  final StorageReference imagesRef = storage.getReference().child(IMAGES_STORAGE).child(name);
-		  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		  img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-		  byte[] data = baos.toByteArray();
-
-		  UploadTask uploadTask = imagesRef.putBytes(data);
-		  uploadTask.addOnFailureListener(e -> {
-			  listener.onUploaded(null);
-			  e.printStackTrace();
-		  })
-		  .addOnSuccessListener(taskSnapshot -> {
-			  loadImage(name, listener);
-		  });
-	  }
-
-	  public func loadImage(String name, IOnImageUploadedListener listener) {
-  let storage = Storage.storage()
-		  final StorageReference imagesRef = storage.getReference().child(IMAGES_STORAGE).child(name);
-		  imagesRef.getDownloadUrl()
-				  .addOnSuccessListener(uri -> listener.onUploaded(uri.toString()))
-				  .addOnFailureListener(exc -> {
-					  listener.onUploaded(null);
-					  exc.printStackTrace();
-				  });
-	  }
-
-	  public func deleteImage(String name, IOnCompleteListener listener) {
-  let storage = Storage.storage()
-		  // Create a storage reference from our app
-		  StorageReference storageRef = storage.getReference();
-		  StorageReference imageRef = storageRef.child(IMAGES_STORAGE).child(name);
-
-		  // Delete the file
-		  imageRef.delete().addOnSuccessListener(afunc -> listener.onComplete(true))
-				  .addOnFailureListener(e -> {
-					  e.printStackTrace();
-					  listener.onComplete(false);
-				  });
-	  }
-
-	  */
-
+	public func uploadImage(name: String, img: UIImage, callback: @escaping (String)->Void) {
+		let storageRef = Storage.storage().reference()
+		let imageRef = storageRef.child(ModelFirebase.IMAGES_STORAGE).child(name)
+		let data = img.jpegData(compressionQuality: 0.8)
+		let metadata = StorageMetadata()
+		metadata.contentType = "image/jpeg"
+		imageRef.putData(data!, metadata: metadata) { (metadata, error) in
+			imageRef.downloadURL { (url, error) in guard let downloadURL = url else {
+				callback("")
+				return
+			}
+				print("url: \(downloadURL)")
+				callback(downloadURL.absoluteString)
+			}
+		}
+	}
+	
+	public func loadImage(name: String, callback: @escaping (UIImage?)->Void) {
+		let storageRef = Storage.storage().reference()
+		let imageRef = storageRef.child(ModelFirebase.IMAGES_STORAGE).child(name)
+		imageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
+			if error != nil {
+				callback(nil)
+			}
+			else {
+				let image = UIImage(data: data!)
+				callback(image)
+			}
+		}
+	}
+	
+	public func deleteImage(name: String, callback: @escaping (Bool)->Void) {
+		// Create a storage reference from our app
+		let storageRef = Storage.storage().reference()
+		let imageRef = storageRef.child(ModelFirebase.IMAGES_STORAGE).child(name);
+		
+		// Delete the file
+		imageRef.delete() { error in
+			if let error = error {
+				print("error: \(error)")
+				callback(false)
+			}
+			else {
+				callback(true)
+			}
+		}
+	}
 }
