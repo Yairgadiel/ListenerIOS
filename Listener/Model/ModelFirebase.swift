@@ -49,6 +49,7 @@ class ModelFirebase {
 		let db  = Firestore.firestore()
 		db.collection(ModelFirebase.RECORDS_LIST_COLLECTION)
 		//				  .whereField(RecordsList.LAST_UPDATED, isGreaterThanOrEqualTo: new Timestamp(since, 0))
+			.order(by: "DateCreated", descending: true)
 			.getDocuments() { (querySnapshot, err) in
 				var data = [RecordsList]()
 				if let err = err {

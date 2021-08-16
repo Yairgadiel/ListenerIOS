@@ -32,7 +32,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		else {
 			Model.instance.getList(byId: listId!, callback: { foundRecordsList in
 				self.recordsList = foundRecordsList
-
+				
 				if (self.recordsList == nil) {
 					self.navigationController?.popViewController(animated: true)
 				}
@@ -40,6 +40,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 					self.listIdLabel.text = self.listId
 					self.listDetailsLabel.text = self.recordsList?.details
 					self.navigationItem.title = self.recordsList?.name
+					self.recordsTable.reloadData()
 				}
 			})
 			
@@ -48,9 +49,10 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	}
 
 	@IBAction func onAddRecordClick(_ sender: UIButton) {
+		// TODO add add method
 		// Check if the last record is not empty
-//		if (recordsList?.records[(recordsList?.records.count ?? 1) - 1].text != "") {
-//			recordsList?.records.append(CheckedRecord(text: "", imgPath: "", isChecked: false))
+//		if (recordsList?.getRecords()[(recordsList?.getRecords().count ?? 1) - 1].text != "") {
+//			recordsList?.getRecords().append(CheckedRecord(text: "", imgPath: "", isChecked: false))
 //			recordsTable.reloadData()
 //		}
 	}
@@ -86,19 +88,18 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	// MARK: - TableView
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-//		return (self.recordsList?.records.count)!
-		return 1
+		return self.recordsList?.getRecords().count ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		let cell = recordsTable.dequeueReusableCell(withIdentifier: "CheckedRecordCell", for: indexPath) as! CheckedRecordCell
+		let cell = recordsTable.dequeueReusableCell(withIdentifier: "CheckedRecordCell", for: indexPath) as! CheckedRecordCell
 		
-//		let currentRecord = (self.recordsList?.records[indexPath.section])!
+		let currentRecord = (self.recordsList?.getRecords()[indexPath.section])!
 		
-//		cell.setRecord(record: currentRecord)
-//		cell.selectionStyle = UITableViewCell.SelectionStyle.none
+		cell.setRecord(record: currentRecord)
+		cell.selectionStyle = UITableViewCell.SelectionStyle.none
 		
-		return UITableViewCell()
+		return cell
 	}
 
 	

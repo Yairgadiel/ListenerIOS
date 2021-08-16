@@ -22,7 +22,7 @@ class Model {
 	}
 	
 	func getList(byId: String, callback: @escaping (RecordsList?)->Void) {
-		modelFirebase.getAllRecords(byField: "id", value: byId) { data in
+		modelFirebase.getAllRecords(byField: "Id", value: byId) { data in
 			var recordsList: RecordsList? = nil
 			
 			if (data.count > 0) {
