@@ -3,12 +3,22 @@
     <entity name="RecordsList" representedClassName="RecordsList" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="details" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="key" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="lastUpdated" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="records" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="RecordsList" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="RecordsList" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>
