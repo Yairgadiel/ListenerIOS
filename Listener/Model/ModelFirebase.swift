@@ -249,13 +249,12 @@ class ModelFirebase {
 		}
 	}
 	
-	public func deleteImage(name: String, callback: @escaping (Bool)->Void) {
+	public func deleteImage(url: String, callback: @escaping (Bool)->Void) {
 		// Create a storage reference from our app
-		let storageRef = Storage.storage().reference()
-		let imageRef = storageRef.child(ModelFirebase.IMAGES_STORAGE).child(name);
+		let storageRef = Storage.storage().reference(forURL: url)
 		
 		// Delete the file
-		imageRef.delete() { error in
+		storageRef.delete() { error in		
 			if let error = error {
 				print("error: \(error)")
 				callback(false)

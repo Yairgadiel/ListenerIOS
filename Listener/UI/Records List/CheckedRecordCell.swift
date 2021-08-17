@@ -9,9 +9,12 @@ import UIKit
 import Kingfisher
 
 class CheckedRecordCell: UITableViewCell {
+	
 	// MARK: Properties
+
 	private var record: CheckedRecord?
 	var imagePickerDelegate: ImagePickerDelegate?
+	private var downloadTask: DownloadTask?
 
 	// MARK: Outlets
 	
@@ -30,10 +33,10 @@ class CheckedRecordCell: UITableViewCell {
 	}
 	
 	@IBAction func onAttachmentClicked(_ sender: UIButton) {
-		imagePickerDelegate?.pickImage(cell: self)
+		imagePickerDelegate?.pickImage(forRecord: self.record!)
 	}
 	
-	// MARK: Lifecycle
+	// MARK: Override
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -59,23 +62,7 @@ class CheckedRecordCell: UITableViewCell {
 		
 		// Init views
 		recordTextField.text = record.text
-		self.setAttachmentImg()
 		
 		setIsChecked()
-	}
-	
-	func setAttachment(imgPath: String) {
-		if (imgPath != "") {
-			self.record?.imgPath = imgPath
-
-			self.setAttachmentImg()
-		}
-	}
-	
-	private func setAttachmentImg() {
-		if (record != nil && record?.imgPath != "" && record?.imgPath != "null") {
-			KF.url(URL(string: record!.imgPath))
-				  .set(to: attachmentBtn.imageView!)
-		}
 	}
 }

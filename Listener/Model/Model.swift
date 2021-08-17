@@ -86,7 +86,7 @@ class Model {
 	}
 	
 	func deleteRecordAttachment(name: String, callback: @escaping (Bool)->Void) {
-		modelFirebase.deleteImage(name: name, callback: callback)
+		modelFirebase.deleteImage(url: name, callback: callback)
 	}
 }
 
