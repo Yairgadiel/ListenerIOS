@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ImagePickerDelegate {
-	func pickImage(cell: CheckedRecordCell)
+	func pickImage(forRecord: CheckedRecord)
 }

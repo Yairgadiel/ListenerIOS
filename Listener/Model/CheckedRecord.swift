@@ -9,8 +9,7 @@ import Foundation
 
 class CheckedRecord {
 	var text: String
-	var imgPath: String?
-	
+	var imgPath: String
 	var isChecked: Bool
 	
 	init(text: String, imgPath: String, isChecked: Bool) {
@@ -24,7 +23,7 @@ extension CheckedRecord {
 	func toJson()->String {
 		var json = "{"
 		
-		json.append("ImgPath=" + (imgPath ?? "null"))
+		json.append("ImgPath=" + (imgPath == "" ? "null" : imgPath))
 		json.append(", ")
 		json.append("Text=" + text)
 		json.append(", ")

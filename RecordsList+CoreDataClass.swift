@@ -65,11 +65,14 @@ public class RecordsList: NSManagedObject {
 			for i in 0..<records.count {
 				let record: CheckedRecord = records[i]
 				
-				json.append(record.toJson())
-				
-				// Separate records with ','
-				if (i < records.count - 1) {
-					json.append(",")
+				// Not saving empty records
+				if (record.text != "") {
+					json.append(record.toJson())
+					
+					// Separate records with ','
+					if (i < records.count - 1) {
+						json.append(",")
+					}
 				}
 			}
 			
@@ -107,7 +110,8 @@ public class RecordsList: NSManagedObject {
 					
 					for entry in entries {
 						let splittedEntry: [String] = entry.components(separatedBy: VALUE_SEPARATOR)
-						record[splittedEntry[0]] = splittedEntry[1]
+						// record[splittedEntry[0]] = splittedEntry[1] This doesn't work since the image urls have '=' in them
+						record[splittedEntry[0]] = entry.substring(from: splittedEntry[0].count + 1)
 					}
 					
 					// Add a new record to the redords list according to its type

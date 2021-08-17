@@ -12,6 +12,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	@IBOutlet weak var listIdLabel: UILabel!
 	@IBOutlet weak var listDetailsLabel: UILabel!
 	@IBOutlet weak var recordsTable: UITableView!
+	@IBOutlet weak var loader: UIActivityIndicatorView!
 	
 	var listId: String?
 	
@@ -21,6 +22,8 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		setLoading(true)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +44,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 					self.listDetailsLabel.text = self.recordsList?.details
 					self.navigationItem.title = self.recordsList?.name
 					self.recordsTable.reloadData()
+					self.setLoading(false)
 				}
 			})
 		}
@@ -57,6 +61,8 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		Model.instance.addList(recordsList: self.recordsList!){isSuccess in}
 	}
 	
+	// MARK: Actions
+	
 	@IBAction func onAddRecordClick(_ sender: UIButton) {
 		if (recordsList != nil) {
 			// Check if the last record is not empty
@@ -68,31 +74,31 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	}
 	
 	@IBAction func onEllipsisClick(_ sender: Any) {
-		let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
-		
-		alert.addAction(UIAlertAction(title: "Approve", style: .default , handler:{ (UIAlertAction)in
-			print("User click Approve button")
-		}))
-		
-		alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
-			print("User click Edit button")
-		}))
-		
-		alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
-			print("User click Delete button")
-		}))
-		
-		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
-			print("User click Dismiss button")
-		}))
-		
-		
-		//uncomment for iPad Support
-		//alert.popoverPresentationController?.sourceView = self.view
-		
-		self.present(alert, animated: true, completion: {
-			print("completion block")
-		})
+//		let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
+//
+//		alert.addAction(UIAlertAction(title: "Approve", style: .default , handler:{ (UIAlertAction)in
+//			print("User click Approve button")
+//		}))
+//
+//		alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
+//			print("User click Edit button")
+//		}))
+//
+//		alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+//			print("User click Delete button")
+//		}))
+//
+//		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+//			print("User click Dismiss button")
+//		}))
+//
+//
+//		//uncomment for iPad Support
+//		//alert.popoverPresentationController?.sourceView = self.view
+//
+//		self.present(alert, animated: true, completion: {
+//			print("completion block")
+//		})
 	}
 	
 	// MARK: - TableView
@@ -121,18 +127,34 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	// MARK: ImagePicker
 	
-	var imageCell: CheckedRecordCell?
+	var imageRecord: CheckedRecord?
 	
-	func pickImage(cell: CheckedRecordCell) {
-		if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary)) {
-			self.imageCell = cell
-			
-			let imagePicker = UIImagePickerController()
-			imagePicker.delegate = self
-			imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-			imagePicker.allowsEditing = true
-			self.present(imagePicker, animated: true, completion: nil)
+	func pickImage(forRecord: CheckedRecord) {
+		self.imageRecord = forRecord
+		
+		if (forRecord.imgPath == "null") {
+			if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary)) {
+				setLoading(true)
+				
+				let imagePicker = UIImagePickerController()
+				imagePicker.delegate = self
+				imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+				imagePicker.allowsEditing = true
+				self.present(imagePicker, animated: true, completion: nil)
+			}
+			else {
+				print("Photo library unavailable")
+			}
 		}
+		else {
+			//If there's already a pic, present the dialog
+			self.displayAttachmentDialog(forRecord: forRecord)
+		}
+	}
+	
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		self.setLoading(false)
+		dismiss(animated: true, completion: nil)
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
@@ -142,10 +164,34 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 			Model.instance.saveRecordAttachment(name: self.recordsList!.name! + "-" + String(Int64(Date().timeIntervalSince1970 * 1000)),
 												img: image!,
 												callback: {url in
-				self.imageCell?.setAttachment(image: image, imgPath: url)
+				self.imageRecord!.imgPath = url
+				self.displayAttachmentDialog(forRecord: self.imageRecord!)
+				self.setLoading(false)
+				
 			})
 			
 			self.dismiss(animated: true, completion: nil)
+		}
+	}
+	
+	func displayAttachmentDialog(forRecord: CheckedRecord) {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let myAlert = storyboard.instantiateViewController(withIdentifier: "alert") as! ImageAlertViewController
+		myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+		myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+		myAlert.record = forRecord
+		myAlert.imagePickerDelegate = self
+		self.present(myAlert, animated: true, completion: nil)
+	}
+	
+	// MARK: Methods
+	
+	func setLoading(_ isLoading: Bool) {
+		if (isLoading) {
+			self.loader.startAnimating()
+		}
+		else {
+			self.loader.stopAnimating()
 		}
 	}
 }
