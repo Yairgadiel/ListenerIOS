@@ -95,29 +95,27 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	// There is just one row in every section
-	  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		  return 1
-	  }
-	  
-	  // Set the spacing between sections
-	  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		  return cellSpacingHeight
-	  }
-	  
-	  // Make the background color show through
-	  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		  let headerView = UIView()
-		  headerView.backgroundColor = UIColor.clear
-		  return headerView
-	  }
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	// Set the spacing between sections
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return cellSpacingHeight
+	}
+	
+	// Make the background color show through
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let headerView = UIView()
+		headerView.backgroundColor = UIColor.clear
+		return headerView
+	}
 	
 	// method to run when table view cell is tapped
-	   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		   // note that indexPath.section is used rather than indexPath.row
-		   print("You tapped cell number \(indexPath.section).")
-
-		   self.performSegue(withIdentifier: "previewsToRecordsList", sender: indexPath.section)
-	   }
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		// note that indexPath.section is used rather than indexPath.row
+		self.performSegue(withIdentifier: "previewsToRecordsList", sender: indexPath.section)
+	}
 	
 	// MARK: - Segue
 	

@@ -66,8 +66,33 @@ class ModelFirebase {
 			}
 	}
 	
+	func getLists(withoutUser: String, callback:@escaping ([RecordsList])->Void) {
+		let db = Firestore.firestore()
+		db.collection(ModelFirebase.RECORDS_LIST_COLLECTION)
+			.order(by: "DateCreated", descending: true)
+			.getDocuments() { (querySnapshot, err) in
+				var data = [RecordsList]()
+				if let err = err {
+					callback(data)
+					print("Error getting documents: \(err)")
+				} else {
+					for document in querySnapshot!.documents {
+						print("\(document.documentID) => \(document.data())")
+						
+						let currList = RecordsList.fromJson(json: document.data())
+						
+						if (!currList.userIdObjects.contains(withoutUser)) {
+							data.append(currList)
+						}
+					}
+					
+					callback(data)
+				}
+			}
+	}
+	
 	func getAllRecords(byField: String, value: String, callback:@escaping ([RecordsList])->Void) {
-		let db  = Firestore.firestore()
+		let db = Firestore.firestore()
 		db.collection(ModelFirebase.RECORDS_LIST_COLLECTION)
 			.whereField(byField, isEqualTo: value)
 			.getDocuments() { (querySnapshot, err) in

@@ -60,6 +60,11 @@ public class RecordsList: NSManagedObject {
 		}	
 	}
 	
+	func add(userId: String) {
+		userIdObjects.append(userId)
+		self.userIds = RecordsList.usersToString(users: self.userIdObjects)
+	}
+	
 	// MARK: Records Converter
 	
 	private let TYPE_SEPARATOR: String = "@"
@@ -232,6 +237,11 @@ extension RecordsList {
 		catch {
 			
 		}
+	}
+	
+	static func rollback() {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		context.rollback()
 	}
 	
 	func delete() {

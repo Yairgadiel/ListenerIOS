@@ -29,6 +29,10 @@ class Model {
 	// MARK: Records Lists
 	
 	func getAllLists(callback: @escaping ([RecordsList])->Void) {
+		// Making sure there aren't any unsaved changes (like additions).
+		// If they were not saved already, we don't need them
+		RecordsList.rollback()
+		
 		// Get the local update date
 		var localLastUpdate = RecordsList.getLocalLastUpdate()
 		
@@ -77,6 +81,18 @@ class Model {
 //					}
 				}
 			}
+		}
+	}
+	
+	func getNotMyLists(callback: @escaping ([RecordsList])->Void) {
+		// Get the current user
+		let user = self.modelFirebase.getLoggedUser()
+		
+		if (user == nil) {
+			callback([RecordsList]())
+		}
+		else {
+			modelFirebase.getLists(withoutUser: user!.id, callback: callback)
 		}
 	}
 	
