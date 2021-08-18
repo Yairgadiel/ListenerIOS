@@ -25,8 +25,12 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 											UIColor.systemYellow,
 											UIColor.systemMint]
 	
+	// MARK: Lifecycle
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		self.navigationItem.setHidesBackButton(true, animated: true)
+		
 		self.previews.addSubview(refreshControl)
 		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 		
@@ -36,6 +40,16 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 			self.reloadData()
 		}
     }
+	
+	// MARK: Actions
+	
+	@IBAction func signOut(_ sender: Any) {
+		Model.instance.signOut()
+		self.navigationController?.popViewController(animated: true)
+	}
+	
+	
+	// MARK: Methods
 	
 	@objc func refresh(_ sender: AnyObject) {
 		self.reloadData()
@@ -50,19 +64,7 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 			self.previews.reloadData()
 			self.refreshControl.endRefreshing()
 		}
-		
 	}
-
-	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 	// MARK: - TableView
 	

@@ -88,6 +88,24 @@ class Model {
 	func deleteRecordAttachment(name: String, callback: @escaping (Bool)->Void) {
 		modelFirebase.deleteImage(url: name, callback: callback)
 	}
+	
+	// MARK: Authentication
+	
+	func signIn(email: String, password: String, callback: @escaping (Bool)->Void) {
+		modelFirebase.signIn(email: email, password: password, callback: callback)
+	}
+	
+	func signUp(email: String, name: String, password: String, callback: @escaping (Bool)->Void) {
+		modelFirebase.signUp(email: email, name: name, password: password, callback: callback)
+	}
+	
+	func signOut() {
+		modelFirebase.signOut()
+	}
+	
+	func getLoggedUser() -> User? {
+		return modelFirebase.getLoggedUser()
+	}
 }
 
 class NotificationListener {
