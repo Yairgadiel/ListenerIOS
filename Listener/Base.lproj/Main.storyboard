@@ -422,10 +422,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="RecordsList" id="8S3-sC-mvZ">
-                        <barButtonItem key="rightBarButtonItem" id="ZYz-Jp-4vw">
-                            <imageReference key="image" image="ellipsis.circle.fill" catalog="system"/>
+                        <barButtonItem key="rightBarButtonItem" title="Leave" id="ZYz-Jp-4vw">
+                            <imageReference key="image" image="trash.slash" catalog="system"/>
                             <connections>
-                                <action selector="onEllipsisClick:" destination="f2P-dh-Psg" id="YV2-c3-yfq"/>
+                                <action selector="onLeaveClick:" destination="f2P-dh-Psg" id="UaR-8q-dmc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -507,13 +507,13 @@
     </scenes>
     <resources>
         <image name="checked" width="16" height="16"/>
-        <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="mail.fill" catalog="system" width="128" height="93"/>
         <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="repeat" catalog="system" width="128" height="98"/>
         <image name="signOut" width="16" height="16"/>
+        <image name="trash.slash" catalog="system" width="115" height="128"/>
         <image name="unchecked" width="16" height="16"/>
         <image name="x.circle" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">

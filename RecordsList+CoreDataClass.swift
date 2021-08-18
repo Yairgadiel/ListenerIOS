@@ -49,6 +49,17 @@ public class RecordsList: NSManagedObject {
 		self.records = self.recordsToString(records: self.recordObjects)
 	}
 	
+	func remove(userId: String) {
+		for i in 0..<userIdObjects.count {
+			
+			if (userIdObjects[i] == userId) {
+				userIdObjects.remove(at: i)
+				self.userIds = RecordsList.usersToString(users: self.userIdObjects)
+				break
+			}
+		}	
+	}
+	
 	// MARK: Records Converter
 	
 	private let TYPE_SEPARATOR: String = "@"
@@ -158,7 +169,6 @@ public class RecordsList: NSManagedObject {
 			if (usersStr != "") {
 				// Separate the users
 				userIdObjects = usersStr!.components(separatedBy: ",")
-				
 			}
 		}
 		
@@ -212,9 +222,9 @@ extension RecordsList {
 		return recordsList
 	}
 	
-	func save() {
+	static func save() {
 		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-		context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+		context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 		
 		do {
 			try context.save()
@@ -224,11 +234,9 @@ extension RecordsList {
 		}
 	}
 	
-	func deleteList() {
+	func delete() {
 		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 		context.delete(self)
-		
-		save()
 	}
 }
 

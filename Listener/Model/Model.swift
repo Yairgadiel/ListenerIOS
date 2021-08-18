@@ -38,22 +38,44 @@ class Model {
 			
 			if (data.count > 0) {
 				// Save ALL data in local DB (the context was updated on each creation)
-				data[0].save()
-								
-				for list in data {					
-					// Get the latest last update
-					if (list.lastUpdated > localLastUpdate) {
-						localLastUpdate = list.lastUpdated
+				RecordsList.save()
+				
+				RecordsList.getAll() {data in
+					// Get the current user
+					let user = self.modelFirebase.getLoggedUser()
+									
+					for list in data {
+						// Get the latest last update
+						if (list.lastUpdated > localLastUpdate) {
+							localLastUpdate = list.lastUpdated
+						}
+						
+						// If our (the logged) user isn't a part of this list - delete it
+						if (user == nil || list.userIds == nil || !list.userIds!.contains(user!.id)) {
+							// Remove from local DB (if existed)
+							list.delete()
+						}
 					}
 					
-					// TODO if our user isn't a part of this list - delete it
-					// list.delete()
+					RecordsList.save()
+										
+					RecordsList.setLocalLastUpdate(lastUpdate: localLastUpdate)
+					
+					// Read all records lists from local DB and update the caller
+					RecordsList.getAll(callback: callback)
+					
+//					RecordsList.getAll() { data in
+//						var relevantData = [RecordsList]()
+//
+//						for list in data {
+//							if (user != nil && list.userIds != nil && list.userIds!.contains(user!.id)) {
+//								relevantData.append(list)
+//							}
+//						}
+//
+//						callback(relevantData)
+//					}
 				}
-				
-				RecordsList.setLocalLastUpdate(lastUpdate: localLastUpdate)
-				
-				// Read all records lists from local DB and update the caller
-				RecordsList.getAll(callback: callback)
 			}
 		}
 	}
