@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -84,7 +85,6 @@
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="onSignWithEmailClick:" destination="BbV-VJ-2JO" eventType="touchUpInside" id="F0U-YN-dAW"/>
                                     <segue destination="lDz-fI-j7r" kind="show" id="ouP-q9-741"/>
                                 </connections>
                             </button>
@@ -170,12 +170,21 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Lists" id="6nf-1W-WOJ">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="0VJ-me-qyL">
-                            <imageReference key="image" image="plus" catalog="system"/>
-                            <connections>
-                                <segue destination="haG-R8-Cvr" kind="show" identifier="previewsToAddition" id="xds-LV-ThS"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" id="0VJ-me-qyL">
+                                <imageReference key="image" image="plus" catalog="system"/>
+                                <connections>
+                                    <segue destination="haG-R8-Cvr" kind="show" identifier="previewsToAddition" id="xds-LV-ThS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Sign Out" id="G47-f8-eOi">
+                                <imageReference key="image" image="signOut"/>
+                                <color key="tintColor" name="AccentColor"/>
+                                <connections>
+                                    <action selector="signOut:" destination="oew-fj-ubA" id="yGd-r9-opl"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="previews" destination="Hwg-en-G6P" id="Z5C-qS-WAd"/>
@@ -500,8 +509,12 @@
         <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="repeat" catalog="system" width="128" height="98"/>
+        <image name="signOut" width="16" height="16"/>
         <image name="unchecked" width="16" height="16"/>
         <image name="x.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

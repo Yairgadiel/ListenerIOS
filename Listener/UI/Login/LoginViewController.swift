@@ -20,12 +20,17 @@ class LoginViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+	
+    }
+	
+	override func viewWillAppear(_ animated: Bool) {
 		// Check if there's a user logged in
 		if (Model.instance.getLoggedUser() != nil) {
 			self.performSegue(withIdentifier: "loginToPreviews", sender: self)
 		}
-    }
+		
+		super.viewWillAppear(animated)
+	}
 	
 	// MARK: Actions
     

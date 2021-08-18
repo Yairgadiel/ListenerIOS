@@ -25,6 +25,8 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 											UIColor.systemYellow,
 											UIColor.systemMint]
 	
+	// MARK: Lifecycle
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.navigationItem.setHidesBackButton(true, animated: true)
@@ -38,6 +40,16 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 			self.reloadData()
 		}
     }
+	
+	// MARK: Actions
+	
+	@IBAction func signOut(_ sender: Any) {
+		Model.instance.signOut()
+		self.navigationController?.popViewController(animated: true)
+	}
+	
+	
+	// MARK: Methods
 	
 	@objc func refresh(_ sender: AnyObject) {
 		self.reloadData()
