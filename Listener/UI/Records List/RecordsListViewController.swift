@@ -52,13 +52,15 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		
-		// Save all changes in remote and local:
-		
-		// Update the items' records
-		recordsList?.updateRecords()
-		
-		Model.instance.addList(recordsList: self.recordsList!){isSuccess in}
+				
+		if (self.recordsList != nil) {
+			// Save all changes in remote and local:
+			
+			// Update the items' records
+			recordsList!.updateRecords()
+			
+			Model.instance.addList(recordsList: self.recordsList!){isSuccess in}
+		}
 	}
 	
 	// MARK: Actions
