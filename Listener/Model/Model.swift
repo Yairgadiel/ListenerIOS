@@ -121,8 +121,8 @@ class Model {
 		modelFirebase.set(user: user, callback: callback)
 	}
 	
-	func getAllUsers(byField: String, value: String, callback:@escaping ([User])->Void) {
-		modelFirebase.getAllUsers(byField: byField, value: value, callback: callback)
+	func getAllUsers(withEmail: String, callback:@escaping ([User])->Void) {
+		modelFirebase.getAllUsers(byField: "email", value: withEmail, callback: callback)
 	}
 			
 	// MARK: Storage
