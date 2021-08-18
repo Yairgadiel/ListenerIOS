@@ -26,6 +26,8 @@ class Model {
 	
 	// MARK: Firestore
 	
+	// MARK: Records Lists
+	
 	func getAllLists(callback: @escaping ([RecordsList])->Void) {
 		// Get the local update date
 		var localLastUpdate = RecordsList.getLocalLastUpdate()
@@ -36,22 +38,44 @@ class Model {
 			
 			if (data.count > 0) {
 				// Save ALL data in local DB (the context was updated on each creation)
-				data[0].save()
-								
-				for list in data {					
-					// Get the latest last update
-					if (list.lastUpdated > localLastUpdate) {
-						localLastUpdate = list.lastUpdated
+				RecordsList.save()
+				
+				RecordsList.getAll() {data in
+					// Get the current user
+					let user = self.modelFirebase.getLoggedUser()
+									
+					for list in data {
+						// Get the latest last update
+						if (list.lastUpdated > localLastUpdate) {
+							localLastUpdate = list.lastUpdated
+						}
+						
+						// If our (the logged) user isn't a part of this list - delete it
+						if (user == nil || list.userIds == nil || !list.userIds!.contains(user!.id)) {
+							// Remove from local DB (if existed)
+							list.delete()
+						}
 					}
 					
-					// TODO if our user isn't a part of this list - delete it
-					// list.delete()
+					RecordsList.save()
+										
+					RecordsList.setLocalLastUpdate(lastUpdate: localLastUpdate)
+					
+					// Read all records lists from local DB and update the caller
+					RecordsList.getAll(callback: callback)
+					
+//					RecordsList.getAll() { data in
+//						var relevantData = [RecordsList]()
+//
+//						for list in data {
+//							if (user != nil && list.userIds != nil && list.userIds!.contains(user!.id)) {
+//								relevantData.append(list)
+//							}
+//						}
+//
+//						callback(relevantData)
+//					}
 				}
-				
-				RecordsList.setLocalLastUpdate(lastUpdate: localLastUpdate)
-				
-				// Read all records lists from local DB and update the caller
-				RecordsList.getAll(callback: callback)
 			}
 		}
 	}
@@ -75,6 +99,16 @@ class Model {
 		}
 	}
 	
+	// MARK: Users
+	
+	func set(user: User, callback: @escaping (Bool)->Void) {
+		modelFirebase.set(user: user, callback: callback)
+	}
+	
+	func getAllUsers(byField: String, value: String, callback:@escaping ([User])->Void) {
+		modelFirebase.getAllUsers(byField: byField, value: value, callback: callback)
+	}
+			
 	// MARK: Storage
 	
 	func saveRecordAttachment(name: String, img: UIImage, callback: @escaping (String)->Void) {
@@ -96,7 +130,22 @@ class Model {
 	}
 	
 	func signUp(email: String, name: String, password: String, callback: @escaping (Bool)->Void) {
-		modelFirebase.signUp(email: email, name: name, password: password, callback: callback)
+		modelFirebase.signUp(email: email, name: name, password: password) {isSuccess in
+			if (isSuccess) {
+				let user = self.modelFirebase.getLoggedUser()
+				
+				if (user == nil) {
+					callback(false)
+				}
+				else {
+					// Adding the newly created user to the remote DB
+					self.modelFirebase.set(user: user!, callback: callback)
+				}
+			}
+			else {
+				callback(false)
+			}
+		}
 	}
 	
 	func signOut() {

@@ -67,38 +67,20 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		if (recordsList != nil) {
 			// Check if the last record is not empty
 			if (recordsList!.getRecords().isEmpty || recordsList!.getRecords()[recordsList!.getRecords().count - 1].text != "") {
-				recordsList?.add(record: CheckedRecord(text: "", imgPath: "", isChecked: false))
+				recordsList?.add(record: CheckedRecord(text: "", imgPath: "null", isChecked: false))
 				recordsTable.reloadData()
 			}
 		}
 	}
 	
-	@IBAction func onEllipsisClick(_ sender: Any) {
-//		let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
-//
-//		alert.addAction(UIAlertAction(title: "Approve", style: .default , handler:{ (UIAlertAction)in
-//			print("User click Approve button")
-//		}))
-//
-//		alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
-//			print("User click Edit button")
-//		}))
-//
-//		alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
-//			print("User click Delete button")
-//		}))
-//
-//		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
-//			print("User click Dismiss button")
-//		}))
-//
-//
-//		//uncomment for iPad Support
-//		//alert.popoverPresentationController?.sourceView = self.view
-//
-//		self.present(alert, animated: true, completion: {
-//			print("completion block")
-//		})
+	@IBAction func onLeaveClick(_ sender: Any) {
+		let user = Model.instance.getLoggedUser()
+		
+		if (user != nil) {
+			self.recordsList?.remove(userId: user!.id)
+		}
+		
+		self.navigationController?.popViewController(animated: true)
 	}
 	
 	// MARK: - TableView
