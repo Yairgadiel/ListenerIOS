@@ -28,14 +28,25 @@ class ListAdditionViewController: UIViewController {
 		// TODO validate input
 		
 		loader.startAnimating()
-		Model.instance.addList(recordsList: RecordsList.create(id: id,
-															   name: name,
-															   details: details,
-															   lastUpdated: 0)) { isSuccess in
+		
+		// Get current user
+		let user = Model.instance.getLoggedUser()
+		
+		if (user == nil) {
+			print("No logged user")
 			self.loader.stopAnimating()
-			
-			if (isSuccess) {
-				self.navigationController?.popViewController(animated: true)
+		}
+		else {
+			Model.instance.addList(recordsList: RecordsList.create(id: id,
+																   name: name,
+																   details: details,
+																   lastUpdated: 0,
+																   userId: user!.id)) { isSuccess in
+				self.loader.stopAnimating()
+				
+				if (isSuccess) {
+					self.navigationController?.popViewController(animated: true)
+				}
 			}
 		}
 	}

@@ -14,8 +14,9 @@ import Firebase
 @objc(RecordsList)
 public class RecordsList: NSManagedObject {
 	var recordObjects: [CheckedRecord] = [CheckedRecord]()
+	var userIdObjects: [String] = [String]()
 	
-	static func create(id: String, name: String, details: String, lastUpdated: Int64) -> RecordsList {
+	static func create(id: String, name: String, details: String, lastUpdated: Int64, userId: String) -> RecordsList {
 		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 		
 		let recordsList = RecordsList(context: context)
@@ -26,6 +27,8 @@ public class RecordsList: NSManagedObject {
 		recordsList.records = ""
 		recordsList.type = 1
 		recordsList.lastUpdated = lastUpdated
+		recordsList.userIds = userId
+		recordsList.userIdObjects = [userId]
 		
 		return recordsList
 	}
@@ -125,6 +128,42 @@ public class RecordsList: NSManagedObject {
 		
 		return recordObjects
 	}
+	
+	// MARK: Users Converter
+	
+	static func usersToString(users: [String]) -> String {
+		var json: String = ""
+		
+		if (!users.isEmpty) {
+			for i in 0..<users.count {
+				let userId: String = users[i]
+				
+				json.append(userId)
+				
+				// Separate records with ','
+				if (i < users.count - 1) {
+					json.append(",")
+				}
+			}
+		}
+		
+		return json
+	}
+	
+
+	func stringToUsers(usersStr: String?) -> [String] {
+		if (usersStr != nil) {
+			userIdObjects = [String]()
+			
+			if (usersStr != "") {
+				// Separate the users
+				userIdObjects = usersStr!.components(separatedBy: ",")
+				
+			}
+		}
+		
+		return userIdObjects
+	}
 }
 
 // MARK: DB
@@ -204,6 +243,7 @@ extension RecordsList {
 		json["Records"] = records ?? ""
 		json["Type"] = 1
 		json["LastUpdated"] = FieldValue.serverTimestamp()
+		json["Users"] = userIdObjects
 		
 		return json
 	}
@@ -219,6 +259,8 @@ extension RecordsList {
 		list.records = json["Records"] as? String
 		list.type = json["Type"] as! Int16
 		list.lastUpdated = (json["LastUpdated"] as? Timestamp)?.seconds ?? 0
+		list.userIdObjects = json["Users"] as? [String] ?? [String]()
+		list.userIds = usersToString(users: list.userIdObjects)
 		
 		return list
 	}
