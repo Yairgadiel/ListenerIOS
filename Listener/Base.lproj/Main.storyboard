@@ -283,6 +283,13 @@
                                 <rect key="frame" x="197" y="319" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Validation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFS-P6-fYA">
+                                <rect key="frame" x="20" y="302" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="16"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ljl-fU-CGz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -297,6 +304,7 @@
                         <outlet property="listName" destination="lOw-dt-CLd" id="10a-WS-GEb"/>
                         <outlet property="loader" destination="OQY-4O-7cx" id="nEM-NA-3Vf"/>
                         <outlet property="tableLoader" destination="48U-m5-UhN" id="osK-hz-rnK"/>
+                        <outlet property="validation" destination="lFS-P6-fYA" id="OOa-8E-Ii5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMh-2k-Eo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

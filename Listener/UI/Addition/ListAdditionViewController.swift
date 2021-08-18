@@ -17,6 +17,7 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 	@IBOutlet weak var loader: UIActivityIndicatorView!
 	@IBOutlet weak var existingListsTable: UITableView!
 	@IBOutlet weak var tableLoader: UIActivityIndicatorView!
+	@IBOutlet weak var validation: UILabel!
 	
 	// MARK: Properteis
 	
@@ -43,20 +44,35 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 		let name = listName.text!
 		let details = listDetails.text!
 		
-		// TODO validate input
+		loader.startAnimating()
 		
-		// Get current user
-		let user = Model.instance.getLoggedUser()
-		
-		if (user == nil) {
-			print("No logged user")
-		}
-		else {
-			addList(RecordsList.create(id: id,
-									   name: name,
-									   details: details,
-									   lastUpdated: 0,
-									   userId: user!.id))
+		// Validate input
+		validate() { errorString in
+			self.validation.text = errorString
+			
+			self.loader.stopAnimating()
+			
+			// Show/Hide Password Validation Label
+			UIView.animate(withDuration: 0.5, animations: {
+				self.validation.isHidden = errorString == ""
+			})
+			
+			// No error
+			if (errorString == "") {
+				// Get current user
+				let user = Model.instance.getLoggedUser()
+				
+				if (user == nil) {
+					print("No logged user")
+				}
+				else {
+					self.addList(RecordsList.create(id: id,
+											   name: name,
+											   details: details,
+											   lastUpdated: 0,
+											   userId: user!.id))
+				}
+			}
 		}
 	}
 	
@@ -72,7 +88,6 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 		let currentList = (self.existingLists?[indexPath.section])!
 		
 		cell.setList(currentList)
-//		cell.selectionStyle = UITableViewCell.SelectionStyle.none
 		
 		return cell
 	}
@@ -103,6 +118,24 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 			
 			if (isSuccess) {
 				self.navigationController?.popViewController(animated: true)
+			}
+		}
+	}
+	
+	func validate(callback: @escaping (String)->Void) {
+		let emptyIdErr = "The list nust have an ID!"
+		let emptyNameErr = "The list must have a name!"
+		let idTakenErr = "The list ID is already taken!"
+		
+		if (listId.text == "")  {
+			callback(emptyIdErr)
+		}
+		else if (listName.text == "") {
+			callback(emptyNameErr)
+		}
+		else {
+			Model.instance.getList(byId: listId.text!) { list in
+				callback(list == nil ? "" : idTakenErr)
 			}
 		}
 	}
