@@ -241,6 +241,10 @@
                                     <action selector="createAction:" destination="haG-R8-Cvr" eventType="touchUpInside" id="2fd-b8-aXL"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="OQY-4O-7cx">
+                                <rect key="frame" x="197" y="387" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ljl-fU-CGz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -258,6 +262,7 @@
                         <outlet property="listDetails" destination="UI2-Cp-SqX" id="e2v-tK-9i8"/>
                         <outlet property="listId" destination="VkK-Ag-0Tx" id="iEH-EW-oOp"/>
                         <outlet property="listName" destination="lOw-dt-CLd" id="10a-WS-GEb"/>
+                        <outlet property="loader" destination="OQY-4O-7cx" id="nEM-NA-3Vf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMh-2k-Eo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -282,7 +287,7 @@
                                 <rect key="frame" x="20" y="164" width="374" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="new-password"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-8B-t7b">
                                 <rect key="frame" x="300" y="230" width="90" height="31"/>
