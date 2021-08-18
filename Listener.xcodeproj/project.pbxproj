@@ -54,7 +54,7 @@
 		BDCBFC4F26B44BE500EA3241 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BDCBFC5226B44BE500EA3241 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDCBFC5526B44BE500EA3241 /* Listener.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Listener.xcdatamodel; sourceTree = "<group>"; };
-		BDCBFC5726B44BE900EA3241 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BDCBFC5726B44BE900EA3241 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Listener/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		BDCBFC5A26B44BE900EA3241 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDCBFC5C26B44BE900EA3241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDF7C50826BB0A2200E3DE1E /* PreviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsViewController.swift; sourceTree = "<group>"; };
