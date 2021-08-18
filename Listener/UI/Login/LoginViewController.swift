@@ -8,25 +8,36 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+	
+	// MARK: Outlets
+	
+	@IBOutlet weak var emailText: UITextField!
+	@IBOutlet weak var nameText: UITextField!
+	@IBOutlet weak var passwordText: UITextField!
+	@IBOutlet weak var loader: UIActivityIndicatorView!
+	
+	// MARK: Lifecycle
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		// TODO check if there's a user logged in
-		if true {
+		// Check if there's a user logged in
+		if (Model.instance.getLoggedUser() != nil) {
 			self.performSegue(withIdentifier: "loginToPreviews", sender: self)
 		}
     }
+	
+	// MARK: Actions
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	@IBAction func onSignUpClick(_ sender: UIButton) {
+		loader.startAnimating()
+		
+		Model.instance.signUp(email: emailText.text ?? "", name: nameText.text ?? "", password: passwordText.text ?? "") { isSuccess in
+			if (isSuccess) {
+				self.performSegue(withIdentifier: "loginToPreviews", sender: self)
+			}
+			
+			self.loader.stopAnimating()
+		}
+	}
 }

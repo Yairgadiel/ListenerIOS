@@ -150,73 +150,83 @@ class ModelFirebase {
 	  }
 
 	  
-
+  */
 	  
 
 	  // MARK: Authentication
 
-	  @Nullable
-	  public User getLoggedUser() {
-  let auth = Auth.auth()
-		  FirebaseUser fbUser = auth.getCurrentUser();
-		  User loggedUser = null;
+	func getLoggedUser() -> User? {
+		let auth = Auth.auth()
+		let fbUser = auth.currentUser
+		var loggedUser: User? = nil
+	
+		if (fbUser != nil) {
+			loggedUser = User(id: fbUser!.uid, name: fbUser!.displayName!, email: fbUser!.email!)
+		}
+		
+		return loggedUser
+	}
 
-		  if (fbUser != null) {
-			  loggedUser = new User(fbUser.getUid(), fbUser.getDisplayName(), fbUser.getEmail());
-		  }
+	func signUp(email: String, name: String, password: String, callback: @escaping (Bool)->Void) {
+		let auth = Auth.auth()
+		auth.createUser(withEmail: email, password: password) { result, error in
+			if result == nil {
+				print("error sign up:")
+				print(error ?? "")
+				callback(false)
+			}
+			else {
+				let user = auth.currentUser
+				
+				if (user == nil) {
+					callback(false)
+				}
+				else {
+					// Set the newly added user's name
+					let changeRequest = user!.createProfileChangeRequest()
+					changeRequest.displayName = name
+					changeRequest.commitChanges { error in
+						if error != nil {
+							print("error update name")
+							print(error ?? "")
+							callback(false)
+							
+							// If unable to set the user's name for some reason - delete it
+							user?.delete()
+						}
+						else {
+							callback(true)
+						}
+					}
+				}
+			}
+		}
+	}
 
-		  return loggedUser;
-	  }
+	func signIn(email: String, password: String, callback: @escaping (Bool)->Void) {
+		let auth = Auth.auth()
+		auth.signIn(withEmail: email, password: password, completion: { result, error in
+			if result == nil {
+				print("error sign in")
+				print(error ?? "")
+				callback(false)
+			}
+			else {
+				callback(true)
+			}
+		})
+	}
 
-	  public func signUp(String name, String email, String password, IOnCompleteListener listener) {
-  let auth = Auth.auth()
-  auth.createUserWithEmailAndPassword(email, password)
-				  .addOnCompleteListener(task -> {
-					  if (!task.isSuccessful()) {
-						  listener.onComplete(false);
-					  }
-					  else {
-						  // Sign in success, update UI with the signed-in user's information
-						  FirebaseUser user = auth.getCurrentUser();
+	func signOut() {
+		do {
+			try Auth.auth().signOut()
+		} catch let signOutError as NSError {
+			print("Error signing out: %@", signOutError)
+		}
+	}
 
-						  if (user == null) {
-							  listener.onComplete(false);
-						  }
-						  else {
-							  // Setting the new user's name
-							  UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-									  .setDisplayName(name).build();
 
-							  user.updateProfile(profileUpdates).addOnCompleteListener(updateTask -> {
-										  if (task.isSuccessful()) {
-											  listener.onComplete(true);
-										  }
-										  else {
-											  // If unable to set the user's name for some reason - delete it
-											  user.delete();
-											  listener.onComplete(false);
-										  }
-									  });
-						  }
-					  }
-				  });
-	  }
-
-	  public func signIn(String email, String password, IOnCompleteListener listener) {
-  let auth = Auth.auth()
-		  auth.signInWithEmailAndPassword(email, password)
-				  .addOnCompleteListener(task -> listener.onComplete(task.isSuccessful()));
-	  }
-
-	  public func signOut() {
-  let auth = Auth.auth()
-		  auth.signOut();
-	  }
-
-	  
-  */
-
-	  // MARK: Storage
+	// MARK: Storage
 
 	public func uploadImage(name: String, img: UIImage, callback: @escaping (String)->Void) {
 		let storageRef = Storage.storage().reference()

@@ -27,6 +27,8 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		self.navigationItem.setHidesBackButton(true, animated: true)
+		
 		self.previews.addSubview(refreshControl)
 		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 		
@@ -50,19 +52,7 @@ class PreviewsViewController: UIViewController, UITableViewDelegate, UITableView
 			self.previews.reloadData()
 			self.refreshControl.endRefreshing()
 		}
-		
 	}
-
-	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 	// MARK: - TableView
 	
