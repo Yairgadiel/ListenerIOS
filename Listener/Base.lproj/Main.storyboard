@@ -53,15 +53,6 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAS-Jo-8hw">
-                                <rect key="frame" x="303" y="301" width="90" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Sign Up"/>
-                                <connections>
-                                    <action selector="onSignUpClick:" destination="BbV-VJ-2JO" eventType="touchUpInside" id="Sv0-qT-Jc9"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already a user?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmz-SO-f7C">
                                 <rect key="frame" x="20" y="697" width="152" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -92,6 +83,22 @@
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Validation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaK-1t-Lbh">
+                                <rect key="frame" x="20" y="272" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="16"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAS-Jo-8hw">
+                                <rect key="frame" x="304" y="301" width="90" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Sign Up"/>
+                                <connections>
+                                    <action selector="onSignUpClick:" destination="BbV-VJ-2JO" eventType="touchUpInside" id="Sv0-qT-Jc9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HkT-8L-ATy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -102,6 +109,7 @@
                         <outlet property="loader" destination="w9i-F2-lzB" id="D5o-9N-gpG"/>
                         <outlet property="nameText" destination="5TY-SP-gwN" id="zVt-8M-yuH"/>
                         <outlet property="passwordText" destination="jan-cn-0XX" id="vBc-qD-9Fu"/>
+                        <outlet property="validation" destination="ZaK-1t-Lbh" id="Lht-NG-ZOm"/>
                         <segue destination="oew-fj-ubA" kind="show" identifier="loginToPreviews" id="Tzg-hD-2no"/>
                     </connections>
                 </viewController>
@@ -304,7 +312,7 @@
                         <outlet property="listName" destination="lOw-dt-CLd" id="10a-WS-GEb"/>
                         <outlet property="loader" destination="OQY-4O-7cx" id="nEM-NA-3Vf"/>
                         <outlet property="tableLoader" destination="48U-m5-UhN" id="osK-hz-rnK"/>
-                        <outlet property="validation" destination="lFS-P6-fYA" id="OOa-8E-Ii5"/>
+                        <outlet property="validation" destination="lFS-P6-fYA" id="Bog-Ix-PLN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMh-2k-Eo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

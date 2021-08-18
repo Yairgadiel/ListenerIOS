@@ -48,14 +48,10 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 		
 		// Validate input
 		validate() { errorString in
-			self.validation.text = errorString
+			// Show/Hide Validation Label
+			self.displayError(errorString)
 			
 			self.loader.stopAnimating()
-			
-			// Show/Hide Password Validation Label
-			UIView.animate(withDuration: 0.5, animations: {
-				self.validation.isHidden = errorString == ""
-			})
 			
 			// No error
 			if (errorString == "") {
@@ -63,7 +59,7 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 				let user = Model.instance.getLoggedUser()
 				
 				if (user == nil) {
-					print("No logged user")
+					self.displayError("No logged user")
 				}
 				else {
 					self.addList(RecordsList.create(id: id,
@@ -119,6 +115,9 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 			if (isSuccess) {
 				self.navigationController?.popViewController(animated: true)
 			}
+			else {
+				self.displayError("Unknown error")
+			}
 		}
 	}
 	
@@ -127,10 +126,10 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 		let emptyNameErr = "The list must have a name!"
 		let idTakenErr = "The list ID is already taken!"
 		
-		if (listId.text == "")  {
+		if (listId.text == nil || listId.text == "")  {
 			callback(emptyIdErr)
 		}
-		else if (listName.text == "") {
+		else if (listName.text == nil || listName.text == "") {
 			callback(emptyNameErr)
 		}
 		else {
@@ -138,5 +137,13 @@ class ListAdditionViewController: UIViewController, UITableViewDelegate, UITable
 				callback(list == nil ? "" : idTakenErr)
 			}
 		}
+	}
+	
+	func displayError(_ errorMsg: String) {
+		self.validation.text = errorMsg
+		
+		UIView.animate(withDuration: 0.5, animations: {
+			self.validation.isHidden = errorMsg == ""
+		})
 	}
 }
