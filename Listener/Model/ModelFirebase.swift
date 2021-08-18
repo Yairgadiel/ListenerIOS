@@ -86,9 +86,6 @@ class ModelFirebase {
 			}
 	}
 
- /*
-	  
-
 	  // MARK: Users
 
 	  /**
@@ -96,62 +93,60 @@ class ModelFirebase {
 	   * @param user the user to set
 	   * @param listener listener notifying of success/failure
 	   */
-	  public func setUser(User user, IOnCompleteListener listener) {
-  let db  = Firestore.firestore()
-		  db.collection(USERS_COLLECTION).document(user.getId())
-				  .set(user)
-				  .addOnSuccessListener(afunc -> listener.onComplete(true))
-				  .addOnFailureListener(e -> {
-					  e.printStackTrace();
-					  listener.onComplete(false);
-				  });
-	  }
+	func set(user: User, callback: @escaping (Bool)->Void) {
+		let db = Firestore.firestore()
+		db.collection(ModelFirebase.USERS_COLLECTION).document(user.id)
+			.setData(user.toJson()) { err in
+				if let err = err {
+					callback(false)
+					print("Error adding document: \(err)")
+				} else {
+					callback(true)
+				}
+			}
+	}
+	
+	/**
+	 * This method gets all users having the given field matching the given value
+	 */
+	func getAllUsers(byField: String, value: String, callback:@escaping ([User])->Void) {
+		let db  = Firestore.firestore()
+		db.collection(ModelFirebase.USERS_COLLECTION)
+			.whereField(byField, isEqualTo: value)
+			.getDocuments() { (querySnapshot, err) in
+				var data = [User]()
+				if let err = err {
+					callback(data)
+					print("Error getting users: \(err)")
+				} else {
+					for document in querySnapshot!.documents {
+						print("\(document.documentID) => \(document.data())")
+						data.append(User.fromJson(json: document.data()))
+					}
+					
+					callback(data)
+				}
+			}
+	}
 
-	  /**
-	   * This method gets all users having the given field matching the given value
-	   */
-	  public func getAllUsersWithField(String field, String value, IOnUsersFetchListener listener) {
-  let db  = Firestore.firestore()
-		  db.collection(USERS_COLLECTION)
-				  .whereEqualTo(field, value)
-				  .get()
-				  .addOnCompleteListener(task -> {
-					  List<User> data = null;
-
-					  if (task.isSuccessful() && task.getResult() != null) {
-						  data = new ArrayList<>(task.getResult().size());
-
-						  for (QueryDocumentSnapshot doc : task.getResult()) {
-							  data.add(doc.toObject(User.class));
-						  }
-					  }
-
-					  listener.onFetch(data);
-				  });
-	  }
-
-	  public func getAllUsers(IOnUsersFetchListener listener) {
-  let db  = Firestore.firestore()
-		  db.collection(USERS_COLLECTION)
-				  .get()
-				  .addOnCompleteListener(task -> {
-					  List<User> data = null;
-
-					  if (task.isSuccessful() && task.getResult() != null) {
-						  data = new ArrayList<>(task.getResult().size());
-
-						  for (QueryDocumentSnapshot doc : task.getResult()) {
-							  data.add(doc.toObject(User.class));
-						  }
-					  }
-
-					  listener.onFetch(data);
-				  });
-	  }
-
-	  
-  */
-	  
+//	  public func getAllUsers(IOnUsersFetchListener listener) {
+//  let db  = Firestore.firestore()
+//		  db.collection(USERS_COLLECTION)
+//				  .get()
+//				  .addOnCompleteListener(task -> {
+//					  List<User> data = null;
+//
+//					  if (task.isSuccessful() && task.getResult() != null) {
+//						  data = new ArrayList<>(task.getResult().size());
+//
+//						  for (QueryDocumentSnapshot doc : task.getResult()) {
+//							  data.add(doc.toObject(User.class));
+//						  }
+//					  }
+//
+//					  listener.onFetch(data);
+//				  });
+//	  }
 
 	  // MARK: Authentication
 

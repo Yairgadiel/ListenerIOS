@@ -26,6 +26,8 @@ class Model {
 	
 	// MARK: Firestore
 	
+	// MARK: Records Lists
+	
 	func getAllLists(callback: @escaping ([RecordsList])->Void) {
 		// Get the local update date
 		var localLastUpdate = RecordsList.getLocalLastUpdate()
@@ -75,6 +77,16 @@ class Model {
 		}
 	}
 	
+	// MARK: Users
+	
+	func set(user: User, callback: @escaping (Bool)->Void) {
+		modelFirebase.set(user: user, callback: callback)
+	}
+	
+	func getAllUsers(byField: String, value: String, callback:@escaping ([User])->Void) {
+		modelFirebase.getAllUsers(byField: byField, value: value, callback: callback)
+	}
+			
 	// MARK: Storage
 	
 	func saveRecordAttachment(name: String, img: UIImage, callback: @escaping (String)->Void) {
@@ -96,7 +108,22 @@ class Model {
 	}
 	
 	func signUp(email: String, name: String, password: String, callback: @escaping (Bool)->Void) {
-		modelFirebase.signUp(email: email, name: name, password: password, callback: callback)
+		modelFirebase.signUp(email: email, name: name, password: password) {isSuccess in
+			if (isSuccess) {
+				let user = self.modelFirebase.getLoggedUser()
+				
+				if (user == nil) {
+					callback(false)
+				}
+				else {
+					// Adding the newly created user to the remote DB
+					self.modelFirebase.set(user: user!, callback: callback)
+				}
+			}
+			else {
+				callback(false)
+			}
+		}
 	}
 	
 	func signOut() {
