@@ -12,6 +12,7 @@ class ListAdditionViewController: UIViewController {
 	@IBOutlet weak var listId: UITextField!
 	@IBOutlet weak var listName: UITextField!
 	@IBOutlet weak var listDetails: UITextField!
+	@IBOutlet weak var loader: UIActivityIndicatorView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -26,10 +27,13 @@ class ListAdditionViewController: UIViewController {
 		
 		// TODO validate input
 		
+		loader.startAnimating()
 		Model.instance.addList(recordsList: RecordsList.create(id: id,
 															   name: name,
 															   details: details,
 															   lastUpdated: 0)) { isSuccess in
+			self.loader.stopAnimating()
+			
 			if (isSuccess) {
 				self.navigationController?.popViewController(animated: true)
 			}
