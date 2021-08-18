@@ -57,12 +57,22 @@ class CheckedRecordCell: UITableViewCell {
 		}
 	}
 	
+	func setAttachmentIcon() {
+		if (record?.imgPath == "null") {
+			attachmentBtn.setImage(UIImage(systemName: "paperclip"), for: .normal)
+		}
+		else {
+			attachmentBtn.setImage(UIImage(systemName: "paperclip.badge.ellipsis"), for: .normal)
+		}
+	}
+	
 	func setRecord(record: CheckedRecord) {
 		self.record = record
 		
 		// Init views
 		recordTextField.text = record.text
 		
+		setAttachmentIcon()
 		setIsChecked()
 	}
 }

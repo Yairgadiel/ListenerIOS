@@ -10,6 +10,7 @@
 		BD1A17E826C695E400C8738E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD1A17E726C695E400C8738E /* GoogleService-Info.plist */; };
 		BD1A17EA26C6B02C00C8738E /* ModelFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1A17E926C6B02C00C8738E /* ModelFirebase.swift */; };
 		BD2ED76826CD4E090076148F /* ExistingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2ED76726CD4E080076148F /* ExistingListCell.swift */; };
+		BD2ED76A26CD7EE10076148F /* UpdateUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2ED76926CD7EE00076148F /* UpdateUIDelegate.swift */; };
 		BD420CD126CCE4C700AA9BA0 /* RecordsList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD420CD026CCE4C700AA9BA0 /* RecordsList+CoreDataProperties.swift */; };
 		BD45A6D126CA66C6000C7794 /* ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */; };
 		BD45A6D526CBF26C000C7794 /* ImageAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD45A6D426CBF263000C7794 /* ImageAlertViewController.swift */; };
@@ -39,6 +40,7 @@
 		BD1A17E726C695E400C8738E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD1A17E926C6B02C00C8738E /* ModelFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFirebase.swift; sourceTree = "<group>"; };
 		BD2ED76726CD4E080076148F /* ExistingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingListCell.swift; sourceTree = "<group>"; };
+		BD2ED76926CD7EE00076148F /* UpdateUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUIDelegate.swift; sourceTree = "<group>"; };
 		BD420CD026CCE4C700AA9BA0 /* RecordsList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordsList+CoreDataProperties.swift"; path = "../../RecordsList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerDelegate.swift; sourceTree = "<group>"; };
 		BD45A6D426CBF263000C7794 /* ImageAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAlertViewController.swift; sourceTree = "<group>"; };
@@ -136,10 +138,11 @@
 		BD567D7B26C2DD2E00082043 /* Records List */ = {
 			isa = PBXGroup;
 			children = (
+				BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */,
 				BD9B00E126BF0D8600453AB2 /* RecordsListViewController.swift */,
 				BD567D7C26C2DDC500082043 /* CheckedRecordCell.swift */,
-				BD45A6D026CA66C6000C7794 /* ImagePickerDelegate.swift */,
 				BD45A6D426CBF263000C7794 /* ImageAlertViewController.swift */,
+				BD2ED76926CD7EE00076148F /* UpdateUIDelegate.swift */,
 			);
 			path = "Records List";
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				BD567D8326C59D1B00082043 /* RecordsList+CoreDataClass.swift in Sources */,
 				BD45A6D526CBF26C000C7794 /* ImageAlertViewController.swift in Sources */,
 				BDF7C50B26BC105700E3DE1E /* ListPreviewCell.swift in Sources */,
+				BD2ED76A26CD7EE10076148F /* UpdateUIDelegate.swift in Sources */,
 				BDF7C51126BD776000E3DE1E /* LoginViewController.swift in Sources */,
 				BD45A6D726CC279F000C7794 /* SignInViewController.swift in Sources */,
 				BDF7C50926BB0A2200E3DE1E /* PreviewsViewController.swift in Sources */,

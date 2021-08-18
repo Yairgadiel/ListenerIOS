@@ -14,6 +14,7 @@ class ImageAlertViewController: UIViewController {
 	
 	var record: CheckedRecord?
 	var imagePickerDelegate: ImagePickerDelegate?
+	var updateUIDelegate: UpdateUIDelegate?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -28,6 +29,7 @@ class ImageAlertViewController: UIViewController {
 			imageView!.kf.setImage(with: URL(string: record!.imgPath), options: [.transition(.fade(0.7))]) { result in
 				switch result {
 				case .success(_):
+					self.updateUIDelegate?.updateUI()
 					print("success")
 				case .failure(_):
 					print("fail")
@@ -64,7 +66,7 @@ class ImageAlertViewController: UIViewController {
 			ImageCache.default.removeImage(forKey: self.record!.imgPath)
 			self.record!.imgPath = "null"
 		
-			
+			self.updateUIDelegate?.updateUI()
 			callback(isSuccess)
 		}
 	}

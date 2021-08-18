@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class RecordsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate, UpdateUIDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 	
 	@IBOutlet weak var listIdLabel: UILabel!
 	@IBOutlet weak var listDetailsLabel: UILabel!
@@ -134,6 +134,10 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		}
 	}
 	
+	func updateUI() {
+		recordsTable.reloadData()
+	}
+	
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		self.setLoading(false)
 		dismiss(animated: true, completion: nil)
@@ -163,6 +167,7 @@ class RecordsListViewController: UIViewController, UITableViewDelegate, UITableV
 		myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
 		myAlert.record = forRecord
 		myAlert.imagePickerDelegate = self
+		myAlert.updateUIDelegate = self
 		self.present(myAlert, animated: true, completion: nil)
 	}
 	
